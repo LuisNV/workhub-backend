@@ -1,0 +1,14 @@
+### Thành công: 200
+GET http://localhost:8081/api/v1/users/1
+
+### Không tìm thấy: 404
+GET http://localhost:8081/api/v1/users/999
+
+### ID không hợp lệ: 400
+GET http://localhost:8081/api/v1/users/abc
+
+### ID âm: 400
+GET http://localhost:8081/api/v1/users/-1
+
+### Health
+GET http://localhost:8081/actuator/health

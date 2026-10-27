@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: workhub-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/workhub}
+    username: ${DB_USERNAME:workhub}
+    password: ${DB_PASSWORD:workhub_local}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: 
+      - classpath:db/migration
+      - classpath:db/local
+  mvc:
+    problemdetails:
+      enabled: true
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8081}
+  error:
+    include-stacktrace: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+app:
+  jwt:
+    secret-base64: ${JWT_SECRET_BASE64}
+    issuer: workhub-backend
+    access-token-minutes: 15

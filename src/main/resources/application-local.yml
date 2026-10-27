@@ -1,0 +1,4 @@
+# Dữ liệu mẫu chỉ được thêm khi bật profile local.
+spring:
+  flyway:
+    locations: classpath:db/migration,classpath:db/local
