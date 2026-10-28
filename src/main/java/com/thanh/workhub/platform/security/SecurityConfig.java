@@ -44,7 +44,7 @@ public class SecurityConfig {
     ) {
         byte[] keyBytes = Base64.getDecoder()
                 .decode(base64Secret);
-        
+
         if (keyBytes.length < 32) {
             throw new IllegalArgumentException(
                 "JWT secret must be at least 32 bytes"
@@ -104,7 +104,9 @@ public class SecurityConfig {
                 // API login không cần token
                 .requestMatchers(
                     HttpMethod.POST,
-                    "/api/v1/auth/login"
+                    "/api/v1/auth/login",
+                    "/api/v1/auth/refresh",
+                    "/api/v1/auth/logout"
                 ).permitAll()
 
                 // Health check công khai

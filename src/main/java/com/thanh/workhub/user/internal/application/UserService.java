@@ -1,9 +1,10 @@
 package com.thanh.workhub.user.internal.application;
 
-import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
-import com.thanh.workhub.user.internal.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
+import com.thanh.workhub.user.internal.persistence.UserRepository;
 
 @Service
 public class UserService {
