@@ -1,6 +1,5 @@
 CREATE TABLE app_users (
  id BIGINT PRIMARY KEY,
- password_hash VARCHAR(255) NOT NULL,
  full_name VARCHAR(150) NOT NULL,
  email VARCHAR(254) NOT NULL UNIQUE,
  phone VARCHAR(30) NOT NULL,

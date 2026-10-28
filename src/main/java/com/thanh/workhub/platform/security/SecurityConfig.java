@@ -44,7 +44,7 @@ public class SecurityConfig {
     ) {
         byte[] keyBytes = Base64.getDecoder()
                 .decode(base64Secret);
-
+        
         if (keyBytes.length < 32) {
             throw new IllegalArgumentException(
                 "JWT secret must be at least 32 bytes"

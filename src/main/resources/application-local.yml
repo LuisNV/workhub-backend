@@ -2,3 +2,7 @@
 spring:
   flyway:
     locations: classpath:db/migration,classpath:db/local
+app:
+  jwt:
+    # Khóa chỉ dùng học trên máy cá nhân (48 byte). Môi trường khác phải đặt JWT_SECRET_BASE64.
+    secret-base64: ${JWT_SECRET_BASE64:bG9jYWwtZGV2LW9ubHktd29ya2h1Yi1qd3Qtc2VjcmV0LWtleS0wMTIzNDU2Nzg5}
