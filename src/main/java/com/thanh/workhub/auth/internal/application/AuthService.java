@@ -39,11 +39,12 @@ public class AuthService {
     @Transactional
     public LoginResponse login(LoginRequest request) {
 
-        String email = request.email()
-            .trim()
-            .toLowerCase(Locale.ROOT);
+        String identifier = request.identifier().trim();
+        boolean loginByEmail = identifier.contains("@");
 
-        User user = userRepository.findByEmail(email)
+        User user = (loginByEmail
+            ? userRepository.findByEmail(identifier.toLowerCase(Locale.ROOT))
+            : userRepository.findByPhone(identifier))
             .orElseThrow(this::invalidCredentials);
 
         boolean valid = passwordEncoder.matches(
@@ -53,6 +54,13 @@ public class AuthService {
 
         if (!valid) {
             throw invalidCredentials();
+        }
+
+        if (loginByEmail && !user.isEmailVerified()) {
+            throw new ResponseStatusException(
+                HttpStatus.FORBIDDEN,
+                "Email chưa được xác thực"
+            );
         }
 
         String accessToken =
@@ -81,7 +89,7 @@ public class AuthService {
     private ResponseStatusException invalidCredentials() {
         return new ResponseStatusException(
             HttpStatus.UNAUTHORIZED,
-            "Email hoặc mật khẩu không đúng"
+            "Email, số điện thoại hoặc mật khẩu không đúng"
         );
     }
 }

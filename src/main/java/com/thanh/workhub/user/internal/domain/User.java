@@ -20,6 +20,8 @@ public class User {
     private String fullName;
     @Column(nullable = false, unique = true, length = 254)
     private String email;
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified;
     @Column(nullable = false, length = 30)
     private String phone;
     @Column(nullable = false, length = 500)
@@ -49,6 +51,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
     }
 
     public String getPhone() {

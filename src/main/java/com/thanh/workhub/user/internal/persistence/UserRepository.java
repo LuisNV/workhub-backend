@@ -8,5 +8,6 @@ import java.util.Optional;
 // Chỉ công khai thao tác đọc đang cần; không thêm save/delete khi chưa sử dụng.
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+    Optional<User> findByPhone(String phone);
     boolean existsByEmail(String email);
 }
