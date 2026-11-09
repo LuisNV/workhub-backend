@@ -7,6 +7,8 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,6 +22,14 @@ class UserDatabaseTest {
  @Container @ServiceConnection
  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17");
  @Autowired MockMvc mvc;
+ @Autowired JdbcTemplate jdbc;
+ @Test @Transactional void readsGenderAndDateOfBirthFromPostgres() throws Exception {
+  jdbc.update("UPDATE app_users SET gender = ?, date_of_birth = ? WHERE id = ?",
+   "MALE", java.sql.Date.valueOf("1995-05-20"), 1L);
+  mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk())
+   .andExpect(jsonPath("$.gender").value("MALE"))
+   .andExpect(jsonPath("$.dateOfBirth").value("1995-05-20"));
+ }
  @Test void readsMigratedUserFromPostgres() throws Exception {
   mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk())
    .andExpect(jsonPath("$.email").value("thanh.nguyen@example.com"))

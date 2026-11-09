@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Run Workhub",
+      "request": "launch",
+      "mainClass": "com.thanh.workhub.WorkhubApplication",
+      "args": "--spring.profiles.active=local",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

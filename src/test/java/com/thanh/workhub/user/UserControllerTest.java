@@ -1,4 +1,5 @@
 package com.thanh.workhub.user;
+import java.time.LocalDate;
 import com.thanh.workhub.user.internal.api.UserController;
 import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
 import com.thanh.workhub.user.internal.application.*;
@@ -23,9 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest {
  @Autowired MockMvc mvc;
  @MockitoBean UserService service;
+ @MockitoBean AvatarService avatarService;
  @Test void returnsProfile() throws Exception {
-  given(service.getProfile(1L)).willReturn(new UserProfileResponse(1L,"Nguyễn Văn Thành","thanh@example.com","0901234567","Hà Nội"));
-  mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk()).andExpect(jsonPath("$.fullName").value("Nguyễn Văn Thành")).andExpect(jsonPath("$.id").value(1));
+  given(service.getProfile(1L)).willReturn(new UserProfileResponse(1L,"Nguyễn Văn Thành","thanh@example.com","0901234567","Hà Nội", "MALE", LocalDate.of(1995, 5, 20), null));
+  mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk()).andExpect(jsonPath("$.fullName").value("Nguyễn Văn Thành")).andExpect(jsonPath("$.id").value(1))
+   .andExpect(jsonPath("$.gender").value("MALE"))
+   .andExpect(jsonPath("$.dateOfBirth").value("1995-05-20"));
  }
  @Test void returns404() throws Exception {
   given(service.getProfile(999L)).willThrow(new UserNotFoundException(999L));

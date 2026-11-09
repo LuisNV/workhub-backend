@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CorsTest {
     @Autowired MockMvc mvc;
     @MockitoBean UserService service;
+    @MockitoBean com.thanh.workhub.user.internal.application.AvatarService avatarService;
 
     @Test
     void allowsLocalFrontendPreflightWithoutToken() throws Exception {

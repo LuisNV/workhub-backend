@@ -1,5 +1,7 @@
 package com.thanh.workhub.user.internal.domain;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,23 @@ public class User {
     private String phone;
     @Column(nullable = false, length = 500)
     private String address;
+    @Column(length = 30)
+    private String gender;
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+    @Column(name = "avatar_public_id", length = 255)
+    private String avatarPublicId;
+    @Column(name = "avatar_url", length = 2048)
+    private String avatarUrl;
+
+    public String getAvatarPublicId() { return avatarPublicId; }
+
+    public String getAvatarUrl() { return avatarUrl; }
+
+    public void updateAvatar(String publicId, String url) {
+        this.avatarPublicId = publicId;
+        this.avatarUrl = url;
+    }
 
     protected User() {
     } // JPA cần constructor không tham số.
@@ -66,5 +85,13 @@ public class User {
     }
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 }
