@@ -66,26 +66,19 @@ public class AuthController {
     ) {
         refreshTokenService.logout(request.refreshToken());
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
     // Kiểm tra người dùng đang đăng nhập
     @GetMapping("/me")
     public ResponseEntity<UserProfileResponse> me(
             @AuthenticationPrincipal Jwt jwt
     ) {
-        var user = authService.getProfile(jwt.getClaimAsString("email"));
-
-        return ResponseEntity.ok(
-            new UserProfileResponse(
-                user.getId(),
-                user.getFullName(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getAddress(),
-                user.getGender(),
-                user.getDateOfBirth(),
-                user.getAvatarUrl()
-            )
-        );
+        try {
+            long userId = Long.parseLong(jwt.getSubject());
+            if (userId <= 0) throw new NumberFormatException();
+            return ResponseEntity.ok(userService.getProfile(userId));
+        } catch (NumberFormatException exception) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token không có user ID hợp lệ");
+        }
     }
 }

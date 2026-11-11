@@ -93,6 +93,7 @@ public class SecurityConfig {
         configuration.setAllowedOriginPatterns(allowedOriginPatterns);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+        configuration.setExposedHeaders(List.of("X-Trace-Id"));
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -102,7 +103,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http
+            HttpSecurity http,
+            com.fasterxml.jackson.databind.ObjectMapper objectMapper
     ) throws Exception {
 
         return http
@@ -138,11 +140,34 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
 
+            .exceptionHandling(errors -> errors
+                .authenticationEntryPoint((request, response, exception) ->
+                    writeError(objectMapper, request, response, 401, "Bạn chưa đăng nhập hoặc token không hợp lệ"))
+                .accessDeniedHandler((request, response, exception) ->
+                    writeError(objectMapper, request, response, 403, "Bạn không có quyền truy cập"))
+            )
+
             // Spring Security tự xử lý Bearer JWT
             .oauth2ResourceServer(oauth ->
                 oauth.jwt(Customizer.withDefaults())
+                    .authenticationEntryPoint((request, response, exception) ->
+                        writeError(objectMapper, request, response, 401, "Bạn chưa đăng nhập hoặc token không hợp lệ"))
+                    .accessDeniedHandler((request, response, exception) ->
+                        writeError(objectMapper, request, response, 403, "Bạn không có quyền truy cập"))
             )
 
             .build();
+    }
+    private static void writeError(com.fasterxml.jackson.databind.ObjectMapper mapper,
+            jakarta.servlet.http.HttpServletRequest request,
+            jakarta.servlet.http.HttpServletResponse response, int status, String message)
+            throws java.io.IOException {
+        response.setStatus(status);
+        if (status == 401) response.setHeader("WWW-Authenticate", "Bearer");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        mapper.writeValue(response.getOutputStream(), new com.thanh.workhub.platform.web.ApiResponse<>(
+                status, status, message, null,
+                com.thanh.workhub.platform.web.TraceIdFilter.traceId(request)));
     }
 }

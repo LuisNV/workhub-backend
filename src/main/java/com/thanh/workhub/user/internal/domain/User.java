@@ -24,7 +24,7 @@ public class User {
     private String email;
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, unique = true, length = 30)
     private String phone;
     @Column(nullable = false, length = 500)
     private String address;
@@ -36,6 +36,20 @@ public class User {
     private String avatarPublicId;
     @Column(name = "avatar_url", length = 2048)
     private String avatarUrl;
+
+    public void changeEmail(String email) {
+        this.email = email;
+        this.emailVerified = false;
+    }
+
+    public void updateProfile(String fullName, String phone, String address,
+            String gender, LocalDate dateOfBirth) {
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getAvatarPublicId() { return avatarPublicId; }
 

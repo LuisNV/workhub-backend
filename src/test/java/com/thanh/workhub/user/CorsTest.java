@@ -46,6 +46,16 @@ class CorsTest {
     void protectedApiStillRequiresTokenAndReturnsCorsHeaders() throws Exception {
         mvc.perform(get("/api/v1/users/1").header("Origin", "http://localhost:3000"))
             .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.code").value(401))
+            .andExpect(jsonPath("$.httpStatus").value(401))
+            .andExpect(jsonPath("$.traceId").isNotEmpty())
             .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:3000"));
+    }
+    @Test
+    void invalidBearerTokenUsesEnvelope() throws Exception {
+        mvc.perform(get("/api/v1/users/1").header("Authorization", "Bearer invalid"))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.code").value(401))
+            .andExpect(jsonPath("$.traceId").isNotEmpty());
     }
 }

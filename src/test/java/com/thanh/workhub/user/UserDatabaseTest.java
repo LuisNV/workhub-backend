@@ -27,13 +27,13 @@ class UserDatabaseTest {
   jdbc.update("UPDATE app_users SET gender = ?, date_of_birth = ? WHERE id = ?",
    "MALE", java.sql.Date.valueOf("1995-05-20"), 1L);
   mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk())
-   .andExpect(jsonPath("$.gender").value("MALE"))
-   .andExpect(jsonPath("$.dateOfBirth").value("1995-05-20"));
+   .andExpect(jsonPath("$.data.gender").value("MALE"))
+   .andExpect(jsonPath("$.data.dateOfBirth").value("1995-05-20"));
  }
  @Test void readsMigratedUserFromPostgres() throws Exception {
   mvc.perform(get("/api/v1/users/1")).andExpect(status().isOk())
-   .andExpect(jsonPath("$.email").value("thanh.nguyen@example.com"))
-   .andExpect(jsonPath("$.address").value("Hà Nội, Việt Nam"));
+   .andExpect(jsonPath("$.data.email").value("thanh.nguyen@example.com"))
+   .andExpect(jsonPath("$.data.address").value("Hà Nội, Việt Nam"));
  }
  @Test void missingUserIs404() throws Exception {
   mvc.perform(get("/api/v1/users/999")).andExpect(status().isNotFound());

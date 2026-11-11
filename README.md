@@ -106,3 +106,38 @@ với fullName/email/phone/address; trường id dư được JSONDecoder bỏ q
 - Chưa chạy với JDK 21 và chưa chạy `UserDatabaseTest` vì môi trường tạo file không có Docker.
 - pom.xml bàn giao giữ Java 21. Trên máy bạn hãy chạy `./mvnw test` với JDK 21 và Docker.
 - Mockito dùng subclass mock maker để không cần Java agent tự attach; không mock class final/static.
+
+### Update current user profile
+
+`PUT /api/v1/users/me` requires `Authorization: Bearer <access-token>`.
+The user ID comes from the JWT subject.
+
+```json
+{
+  "fullName": "Nguyễn Văn Thành",
+  "phone": "0901234567",
+  "address": "Hà Nội",
+  "gender": "MALE",
+  "dateOfBirth": "1995-05-20"
+}
+```
+
+`fullName`, `phone`, and `address` are required, with maximum lengths of 150,
+30, and 500 characters. `gender` accepts `MALE`, `FEMALE`, `OTHER`, or `null`.
+`dateOfBirth` accepts an ISO date no later than today, or `null`.
+Omitting either optional field clears its stored value.
+Avatar is not updated by this endpoint. Optional `email` updates the email;
+if omitted, the current email is preserved. A changed email requires `currentPassword`.
+Missing/blank password returns HTTP 409 with `code: 1001`; incorrect password returns
+HTTP 400 with `code: 1002`; an email already in use returns HTTP 409 with `code: 1003`.
+These checks happen before profile changes are applied. Resubmit the whole form with
+`currentPassword` after code 1001. The new email is stored lowercase and marked
+unverified. Email login requires verification; phone login remains available.
+Email verification delivery is not implemented by this endpoint.
+Returns HTTP 200 with the updated profile inside the standard response `data` field.
+
+Profile updates reject a phone number belonging to another user with HTTP 409,
+`code: 1004`, and message `Số điện thoại đã được sử dụng`. Leading/trailing
+whitespace is removed before checking and saving. Migration V9 adds a unique
+constraint on `app_users.phone` for concurrent writes. Existing duplicate phone
+numbers must be resolved before applying this migration.

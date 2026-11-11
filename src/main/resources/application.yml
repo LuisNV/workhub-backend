@@ -18,6 +18,8 @@ spring:
   mvc:
     problemdetails:
       enabled: true
+  config:
+    import: optional:file:.env[.properties]
 server:
   address: ${SERVER_ADDRESS:127.0.0.1}
   port: ${SERVER_PORT:8081}
@@ -30,7 +32,7 @@ management:
         include: health
 app:
   cloudinary:
-    enabled: ${CLOUDINARY_ENABLED:false}
+    enabled: ${CLOUDINARY_ENABLED:true}
     cloud-name: ${CLOUDINARY_CLOUD_NAME:}
     api-key: ${CLOUDINARY_API_KEY:}
     api-secret: ${CLOUDINARY_API_SECRET:}

@@ -55,15 +55,15 @@ class AvatarDatabaseTest {
             mvc.perform(multipart("/api/v1/users/me/avatar").file(image())
                             .param("userId", "999").with(jwt().jwt(j -> j.subject("1"))))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.id").value(1))
-                    .andExpect(jsonPath("$.avatarUrl").value("https://example.com/avatar.png"));
+                    .andExpect(jsonPath("$.data.id").value(1))
+                    .andExpect(jsonPath("$.data.avatarUrl").value("https://example.com/avatar.png"));
             assertThat(jdbc.queryForObject("SELECT avatar_public_id FROM app_users WHERE id = 1", String.class))
                     .isEqualTo("new-avatar");
             verify(storage).deleteQuietly("old-avatar");
             mvc.perform(get("/api/v1/auth/me").with(jwt().jwt(j -> j.subject("1")
                             .claim("email", "thanh.nguyen@example.com"))))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.avatarUrl").value("https://example.com/avatar.png"));
+                    .andExpect(jsonPath("$.data.avatarUrl").value("https://example.com/avatar.png"));
         } finally {
             jdbc.update("UPDATE app_users SET avatar_public_id = NULL, avatar_url = NULL WHERE id = 1");
         }

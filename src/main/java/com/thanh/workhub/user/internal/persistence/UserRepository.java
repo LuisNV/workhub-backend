@@ -14,5 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findForAvatarUpdate(@Param("id") Long id);
     Optional<User> findByEmail(String email);
     Optional<User> findByPhone(String phone);
+    boolean existsByPhoneAndIdNot(String phone, Long id);
     boolean existsByEmail(String email);
 }
