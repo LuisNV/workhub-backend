@@ -1,5 +1,4 @@
-
-package com.thanh.workhub.user.internal.domain;
+package com.thanh.workhub.auth.internal.domain;
 
 import java.time.Instant;
 import java.util.UUID;

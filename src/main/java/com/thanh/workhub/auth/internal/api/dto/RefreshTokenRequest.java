@@ -1,4 +1,3 @@
-
 package com.thanh.workhub.auth.internal.api.dto;
 
 import jakarta.validation.constraints.NotBlank;

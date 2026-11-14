@@ -1,95 +1,53 @@
-
 package com.thanh.workhub.auth.internal.application;
 
 import java.util.Locale;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.thanh.workhub.auth.internal.api.dto.LoginRequest;
 import com.thanh.workhub.auth.internal.api.dto.LoginResponse;
 import com.thanh.workhub.platform.security.JwtService;
-import com.thanh.workhub.user.internal.domain.User;
-import com.thanh.workhub.user.internal.persistence.UserRepository;
+import com.thanh.workhub.platform.web.ApiException;
+import com.thanh.workhub.platform.web.ErrorCode;
+import com.thanh.workhub.user.UserApi;
+import com.thanh.workhub.user.UserCredentials;
 
 @Service
-
 public class AuthService {
+    private final UserApi userApi;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
 
-    public AuthService(
-        UserRepository userRepository,
-        PasswordEncoder passwordEncoder,
-        JwtService jwtService,
-        RefreshTokenService refreshTokenService
-    ) {
-        this.userRepository = userRepository;
+    public AuthService(UserApi userApi, PasswordEncoder passwordEncoder, JwtService jwtService,
+            RefreshTokenService refreshTokenService) {
+        this.userApi = userApi;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
     }
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
-    private final RefreshTokenService refreshTokenService;
-
     @Transactional
     public LoginResponse login(LoginRequest request) {
-
         String identifier = request.identifier().trim();
         boolean loginByEmail = identifier.contains("@");
 
-        User user = (loginByEmail
-            ? userRepository.findByEmail(identifier.toLowerCase(Locale.ROOT))
-            : userRepository.findByPhone(identifier))
-            .orElseThrow(this::invalidCredentials);
+        UserCredentials user = (loginByEmail
+                ? userApi.findCredentialsByEmail(identifier.toLowerCase(Locale.ROOT))
+                : userApi.findCredentialsByPhone(identifier))
+                .orElseThrow(() -> new ApiException(ErrorCode.INVALID_CREDENTIALS));
 
-        boolean valid = passwordEncoder.matches(
-            request.password(),
-            user.getPasswordHash()
-        );
-
-        if (!valid) {
-            throw invalidCredentials();
+        if (!passwordEncoder.matches(request.password(), user.passwordHash())) {
+            throw new ApiException(ErrorCode.INVALID_CREDENTIALS);
+        }
+        if (loginByEmail && !user.emailVerified()) {
+            throw new ApiException(ErrorCode.EMAIL_NOT_VERIFIED);
         }
 
-        if (loginByEmail && !user.isEmailVerified()) {
-            throw new ResponseStatusException(
-                HttpStatus.FORBIDDEN,
-                "Email chưa được xác thực"
-            );
-        }
-
-        String accessToken =
-            jwtService.generateAccessToken(user);
-
-        String refreshToken =
-            refreshTokenService.create(user.getId());
-
-        return new LoginResponse(
-            accessToken,
-            refreshToken,
-            "Bearer",
-            jwtService.getExpiresInSeconds()
-        );
-    } 
-    public User getProfile(String email) {
-      
-        var user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Không tìm thấy người dùng với email " + email
-            ));
-       
-        return user;
-    }
-    private ResponseStatusException invalidCredentials() {
-        return new ResponseStatusException(
-            HttpStatus.UNAUTHORIZED,
-            "Email, số điện thoại hoặc mật khẩu không đúng"
-        );
+        String accessToken = jwtService.generateAccessToken(user.id(), user.email());
+        String refreshToken = refreshTokenService.create(user.id());
+        return new LoginResponse(accessToken, refreshToken, "Bearer", jwtService.getExpiresInSeconds());
     }
 }

@@ -1,4 +1,4 @@
-package com.thanh.workhub.user.internal.api.dto;
+package com.thanh.workhub.user;
 
 import java.time.LocalDate;
 

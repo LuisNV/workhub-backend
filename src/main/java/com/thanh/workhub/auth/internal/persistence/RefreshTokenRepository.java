@@ -1,4 +1,3 @@
-
 package com.thanh.workhub.auth.internal.persistence;
 
 import java.time.Instant;
@@ -11,7 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.thanh.workhub.user.internal.domain.RefreshToken;
+import com.thanh.workhub.auth.internal.domain.RefreshToken;
 
 import jakarta.persistence.LockModeType;
 

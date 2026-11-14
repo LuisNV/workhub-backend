@@ -1,7 +1,4 @@
-
 package com.thanh.workhub.platform.security;
-
-
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -10,8 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
-
-import com.thanh.workhub.user.internal.domain.User;
 
 @Service
 public class JwtService {
@@ -31,7 +26,7 @@ public class JwtService {
         this.accessTokenMinutes = accessTokenMinutes;
     }
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(Long userId, String email) {
 
         Instant now = Instant.now();
 
@@ -44,8 +39,8 @@ public class JwtService {
             .issuer(issuer)
             .issuedAt(now)
             .expiresAt(expiresAt)
-            .subject(user.getId().toString())
-            .claim("email", user.getEmail())
+            .subject(userId.toString())
+            .claim("email", email)
             .build();
 
         JwsHeader header = JwsHeader

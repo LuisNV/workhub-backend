@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.thanh.workhub.platform.security.SecurityConfig;
 import com.thanh.workhub.user.internal.api.UserController;
-import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
 import com.thanh.workhub.user.internal.application.AvatarService;
 import com.thanh.workhub.user.internal.application.UserNotFoundException;
 import com.thanh.workhub.user.internal.application.UserService;
@@ -82,7 +81,8 @@ class UserControllerTest {
  }
  @Test void rejectsInvalidProfile() throws Exception {
   mvc.perform(put("/api/v1/users/me")
-   .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt())
+   .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt()
+    .jwt(jwt -> jwt.subject("7")))
    .contentType("application/json")
    .content("""
     {"fullName":" ","phone":"0901234567","address":"Hà Nội","gender":"INVALID"}
@@ -95,7 +95,7 @@ class UserControllerTest {
   var request = new com.thanh.workhub.user.internal.api.dto.UpdateProfileRequest(
    "Name", "123", "Address", null, null, "new@example.com", null);
   given(service.updateProfile(7L, request)).willThrow(new com.thanh.workhub.platform.web.ApiException(
-   1001, org.springframework.http.HttpStatus.CONFLICT, "Vui lòng nhập mật khẩu hiện tại để đổi email"));
+   com.thanh.workhub.platform.web.ErrorCode.CURRENT_PASSWORD_REQUIRED));
   mvc.perform(put("/api/v1/users/me")
    .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt()
     .jwt(jwt -> jwt.subject("7")))
