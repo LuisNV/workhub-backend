@@ -20,6 +20,14 @@ docker compose up -d --wait
 `spring-boot:run` mặc định bật profile `local` (cấu hình trong `pom.xml`). Kiểm tra log khởi động có dòng
 `The following 1 profile is active: "local"`. Muốn đổi profile: `./mvnw spring-boot:run "-Dspring-boot.run.profiles=ten"`
 (PowerShell bắt buộc có dấu nháy).
+
+Profile `local` tắt Cloudinary mặc định (upload avatar trả 503). Muốn bật, tạo file `.env` cạnh `pom.xml`:
+```properties
+CLOUDINARY_ENABLED=true
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
+```
 Windows: dùng `mvnw.cmd` thay `./mvnw`.
 Nếu đã cài Maven có thể dùng `mvn` thay wrapper.
 

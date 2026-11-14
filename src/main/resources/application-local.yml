@@ -6,3 +6,7 @@ app:
   jwt:
     # Khóa chỉ dùng học trên máy cá nhân (32 byte). Môi trường khác phải đặt JWT_SECRET_BASE64.
     secret-base64: ${JWT_SECRET_BASE64:w+C+xqk94kyDKqeXm8+6eVBc4CTmHEDs1iRkxb5mUmE=}
+  cloudinary:
+    # Local mặc định tắt để app chạy được khi chưa có key (upload avatar trả 503).
+    # Muốn bật: đặt CLOUDINARY_ENABLED=true và 3 biến CLOUDINARY_* trong .env.
+    enabled: ${CLOUDINARY_ENABLED:false}
