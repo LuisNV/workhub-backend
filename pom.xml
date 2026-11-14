@@ -13,6 +13,7 @@
     <properties>
         <java.version>21</java.version>
         <spring-modulith.version>1.4.4</spring-modulith.version>
+        <spring-boot.run.profiles>local</spring-boot.run.profiles>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -118,6 +119,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- ./mvnw spring-boot:run mặc định dùng profile local (seed + JWT secret học).
+                         Chỉ áp dụng khi chạy bằng Maven; file jar không bị ảnh hưởng. -->
+                    <profiles>
+                        <profile>${spring-boot.run.profiles}</profile>
+                    </profiles>
+                </configuration>
             </plugin>
         </plugins>
     </build>

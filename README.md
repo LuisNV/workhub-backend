@@ -15,8 +15,11 @@ Tại thư mục có pom.xml:
 ```bash
 chmod +x mvnw
 docker compose up -d --wait
-./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+./mvnw spring-boot:run
 ```
+`spring-boot:run` mặc định bật profile `local` (cấu hình trong `pom.xml`). Kiểm tra log khởi động có dòng
+`The following 1 profile is active: "local"`. Muốn đổi profile: `./mvnw spring-boot:run "-Dspring-boot.run.profiles=ten"`
+(PowerShell bắt buộc có dấu nháy).
 Windows: dùng `mvnw.cmd` thay `./mvnw`.
 Nếu đã cài Maven có thể dùng `mvn` thay wrapper.
 
