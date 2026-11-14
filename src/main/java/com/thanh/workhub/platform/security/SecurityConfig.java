@@ -1,6 +1,7 @@
 
 package com.thanh.workhub.platform.security;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
@@ -27,9 +28,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.thanh.workhub.platform.web.ApiResponse;
+import com.thanh.workhub.platform.web.ErrorCode;
+import com.thanh.workhub.platform.web.TraceIdFilter;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class SecurityConfig {
@@ -104,7 +112,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            com.fasterxml.jackson.databind.ObjectMapper objectMapper
+            ObjectMapper objectMapper
     ) throws Exception {
 
         return http
@@ -142,32 +150,31 @@ public class SecurityConfig {
 
             .exceptionHandling(errors -> errors
                 .authenticationEntryPoint((request, response, exception) ->
-                    writeError(objectMapper, request, response, 401, "Bạn chưa đăng nhập hoặc token không hợp lệ"))
+                    writeError(objectMapper, request, response, ErrorCode.UNAUTHORIZED))
                 .accessDeniedHandler((request, response, exception) ->
-                    writeError(objectMapper, request, response, 403, "Bạn không có quyền truy cập"))
+                    writeError(objectMapper, request, response, ErrorCode.FORBIDDEN))
             )
 
             // Spring Security tự xử lý Bearer JWT
             .oauth2ResourceServer(oauth ->
                 oauth.jwt(Customizer.withDefaults())
                     .authenticationEntryPoint((request, response, exception) ->
-                        writeError(objectMapper, request, response, 401, "Bạn chưa đăng nhập hoặc token không hợp lệ"))
+                        writeError(objectMapper, request, response, ErrorCode.UNAUTHORIZED))
                     .accessDeniedHandler((request, response, exception) ->
-                        writeError(objectMapper, request, response, 403, "Bạn không có quyền truy cập"))
+                        writeError(objectMapper, request, response, ErrorCode.FORBIDDEN))
             )
 
             .build();
     }
-    private static void writeError(com.fasterxml.jackson.databind.ObjectMapper mapper,
-            jakarta.servlet.http.HttpServletRequest request,
-            jakarta.servlet.http.HttpServletResponse response, int status, String message)
-            throws java.io.IOException {
+
+    private static void writeError(ObjectMapper mapper, HttpServletRequest request,
+            HttpServletResponse response, ErrorCode error) throws IOException {
+        int status = error.status().value();
         response.setStatus(status);
         if (status == 401) response.setHeader("WWW-Authenticate", "Bearer");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        mapper.writeValue(response.getOutputStream(), new com.thanh.workhub.platform.web.ApiResponse<>(
-                status, status, message, null,
-                com.thanh.workhub.platform.web.TraceIdFilter.traceId(request)));
+        mapper.writeValue(response.getOutputStream(), ApiResponse.error(
+                error.code(), status, error.defaultMessage(), TraceIdFilter.traceId(request)));
     }
 }

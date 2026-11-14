@@ -1,4 +1,10 @@
 package com.thanh.workhub.user.internal.application;
-public class UserNotFoundException extends RuntimeException {
- public UserNotFoundException(Long id) { super("Không tìm thấy người dùng có ID " + id); }
+
+import com.thanh.workhub.platform.web.ApiException;
+import com.thanh.workhub.platform.web.ErrorCode;
+
+public class UserNotFoundException extends ApiException {
+    public UserNotFoundException(Long id) {
+        super(ErrorCode.USER_NOT_FOUND, "Không tìm thấy người dùng có ID " + id);
+    }
 }

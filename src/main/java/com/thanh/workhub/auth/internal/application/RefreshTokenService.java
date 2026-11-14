@@ -15,30 +15,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thanh.workhub.auth.internal.api.dto.LoginResponse;
+import com.thanh.workhub.auth.internal.domain.RefreshToken;
 import com.thanh.workhub.auth.internal.persistence.RefreshTokenRepository;
 import com.thanh.workhub.platform.security.JwtService;
-import com.thanh.workhub.user.internal.domain.RefreshToken;
-import com.thanh.workhub.user.internal.domain.User;
-import com.thanh.workhub.user.internal.persistence.UserRepository;
+import com.thanh.workhub.user.UserApi;
+import com.thanh.workhub.user.UserCredentials;
 
 @Service
 public class RefreshTokenService {
 
+    private final RefreshTokenRepository tokenRepository;
+    private final UserApi userApi;
+    private final JwtService jwtService;
+    private final SecureRandom secureRandom = new SecureRandom();
+
     public RefreshTokenService(
         RefreshTokenRepository tokenRepository,
-        UserRepository userRepository,
+        UserApi userApi,
         JwtService jwtService
     ) {
         this.tokenRepository = tokenRepository;
-        this.userRepository = userRepository;
+        this.userApi = userApi;
         this.jwtService = jwtService;
     }
-
-    private final RefreshTokenRepository tokenRepository;
-    private final UserRepository userRepository;
-    private final JwtService jwtService;
-
-    private final SecureRandom secureRandom = new SecureRandom();
 
     // Tạo Refresh Token lần đầu sau khi login
     @Transactional
@@ -81,14 +80,14 @@ public class RefreshTokenService {
             return Optional.empty();
         }
 
-        Optional<User> userOptional =
-            userRepository.findById(oldToken.getUserId());
+        Optional<UserCredentials> userOptional =
+            userApi.findCredentialsById(oldToken.getUserId());
 
         if (userOptional.isEmpty()) {
             return Optional.empty();
         }
 
-        User user = userOptional.get();
+        UserCredentials user = userOptional.get();
 
         // Vô hiệu hóa Refresh Token cũ
         oldToken.revoke();
@@ -96,13 +95,13 @@ public class RefreshTokenService {
 
         // Phát Refresh Token mới cùng family
         String newRefreshToken = issueRefreshToken(
-            user.getId(),
+            user.id(),
             oldToken.getFamilyId()
         );
 
         // Tạo JWT mới
         String newAccessToken =
-            jwtService.generateAccessToken(user);
+            jwtService.generateAccessToken(user.id(), user.email());
 
         return Optional.of(
             new LoginResponse(

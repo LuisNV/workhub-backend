@@ -17,8 +17,8 @@ import com.thanh.workhub.auth.internal.api.AuthController;
 import com.thanh.workhub.auth.internal.application.AuthService;
 import com.thanh.workhub.auth.internal.application.RefreshTokenService;
 import com.thanh.workhub.platform.security.SecurityConfig;
-import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
-import com.thanh.workhub.user.internal.application.UserService;
+import com.thanh.workhub.user.UserApi;
+import com.thanh.workhub.user.UserProfileResponse;
 
 @WebMvcTest(value = AuthController.class, properties =
         "app.jwt.secret-base64=MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY=")
@@ -27,7 +27,7 @@ class AuthControllerTest {
     @Autowired MockMvc mvc;
     @MockitoBean AuthService auth;
     @MockitoBean RefreshTokenService refreshTokens;
-    @MockitoBean UserService users;
+    @MockitoBean UserApi users;
 
     @Test void readsProfileByIdEvenWhenTokenContainsOldEmail() throws Exception {
         when(users.getProfile(7L)).thenReturn(new UserProfileResponse(

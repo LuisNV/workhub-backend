@@ -2,19 +2,20 @@ package com.thanh.workhub.user.internal.application;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Set;
 import javax.imageio.ImageIO;
 
 import com.thanh.workhub.platform.storage.AvatarStorage;
-import com.thanh.workhub.user.internal.api.dto.UserProfileResponse;
+import com.thanh.workhub.platform.web.ApiException;
+import com.thanh.workhub.platform.web.ErrorCode;
+import com.thanh.workhub.user.UserProfileResponse;
 import com.thanh.workhub.user.internal.persistence.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AvatarService {
@@ -47,9 +48,9 @@ public class AvatarService {
     }
 
     private byte[] validate(MultipartFile file) {
-        if (file.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ảnh không được rỗng");
+        if (file.isEmpty()) throw new ApiException(ErrorCode.IMAGE_EMPTY);
         if (file.getSize() > 5L * 1024 * 1024) {
-            throw new ResponseStatusException(HttpStatus.PAYLOAD_TOO_LARGE, "Ảnh tối đa 5 MB");
+            throw new ApiException(ErrorCode.IMAGE_TOO_LARGE);
         }
         try {
             byte[] bytes = file.getBytes();
@@ -59,11 +60,11 @@ public class AvatarService {
                 var reader = readers.next();
                 try {
                     reader.setInput(input);
-                    if (!Set.of("JPEG", "PNG").contains(reader.getFormatName().toUpperCase(java.util.Locale.ROOT))) {
+                    if (!Set.of("JPEG", "PNG").contains(reader.getFormatName().toUpperCase(Locale.ROOT))) {
                         throw invalidImage();
                     }
                     if ((long) reader.getWidth(0) * reader.getHeight(0) > 20_000_000L) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ảnh tối đa 20 megapixel");
+                        throw new ApiException(ErrorCode.IMAGE_TOO_MANY_PIXELS);
                     }
                     if (reader.read(0) == null) throw invalidImage();
                 } finally {
@@ -76,7 +77,7 @@ public class AvatarService {
         }
     }
 
-    private ResponseStatusException invalidImage() {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chỉ chấp nhận ảnh JPEG hoặc PNG hợp lệ");
+    private ApiException invalidImage() {
+        return new ApiException(ErrorCode.IMAGE_INVALID);
     }
 }

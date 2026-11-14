@@ -2,16 +2,28 @@ package com.thanh.workhub.platform.web;
 
 import org.springframework.http.HttpStatus;
 
+/** Exception duy nhất dùng để trả lỗi có chủ đích cho client. */
 public class ApiException extends RuntimeException {
-    private final int code;
-    private final HttpStatus status;
+    private final ErrorCode errorCode;
 
-    public ApiException(int code, HttpStatus status, String message) {
-        super(message);
-        this.code = code;
-        this.status = status;
+    public ApiException(ErrorCode errorCode) {
+        this(errorCode, errorCode.defaultMessage());
     }
 
-    public int getCode() { return code; }
-    public HttpStatus getStatus() { return status; }
+    public ApiException(ErrorCode errorCode, String message) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
+
+    public int getCode() {
+        return errorCode.code();
+    }
+
+    public HttpStatus getStatus() {
+        return errorCode.status();
+    }
 }
