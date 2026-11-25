@@ -58,7 +58,14 @@ public enum ErrorCode {
     // Thiết bị đăng nhập
     SESSION_NOT_FOUND(1015, HttpStatus.NOT_FOUND, "Không tìm thấy thiết bị đăng nhập"),
     SESSION_UNKNOWN(1016, HttpStatus.BAD_REQUEST,
-            "Không xác định được thiết bị hiện tại, vui lòng đăng nhập lại");
+            "Không xác định được thiết bị hiện tại, vui lòng đăng nhập lại"),
+
+    // Đổi mật khẩu
+    PASSWORD_SAME_AS_CURRENT(1017, HttpStatus.BAD_REQUEST, "Mật khẩu mới phải khác mật khẩu hiện tại"),
+    PASSWORD_CHECK_LOCKED(1018, HttpStatus.TOO_MANY_REQUESTS,
+            "Nhập sai mật khẩu quá nhiều lần, vui lòng thử lại sau"),
+    PASSWORD_CHANGE_NOT_FOUND(1019, HttpStatus.NOT_FOUND, "Không tìm thấy yêu cầu đổi mật khẩu"),
+    PASSWORD_CHANGE_EXPIRED(1020, HttpStatus.GONE, "Yêu cầu đổi mật khẩu đã hết hạn, vui lòng thực hiện lại");
 
     private final int code;
     private final HttpStatus status;

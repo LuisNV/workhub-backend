@@ -24,4 +24,14 @@ public interface UserApi {
      * (kể cả khi hai request đăng ký chạy song song).
      */
     UserProfileResponse register(NewUser newUser);
+
+    /**
+     * Kiểm tra mật khẩu hiện tại, có giới hạn số lần sai (dùng chung mọi chức năng cần nhập lại mật khẩu).
+     * Ném CURRENT_PASSWORD_INCORRECT ("Bạn còn N lần thử") hoặc PASSWORD_CHECK_LOCKED. Lần sai vẫn được ghi lại
+     * dù transaction của nơi gọi rollback.
+     */
+    void verifyCurrentPassword(Long userId, String rawPassword);
+
+    /** Thay hash mật khẩu. Ném USER_NOT_FOUND nếu user không tồn tại. */
+    void changePassword(Long userId, String newPasswordHash);
 }

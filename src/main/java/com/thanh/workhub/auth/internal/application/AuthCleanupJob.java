@@ -9,25 +9,28 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thanh.workhub.auth.internal.persistence.PasswordChangeRequestRepository;
 import com.thanh.workhub.auth.internal.persistence.RegistrationOtpSendRepository;
 import com.thanh.workhub.auth.internal.persistence.RegistrationSessionRepository;
 
 /**
- * Xóa phiên đăng ký đã hết hạn quá 1 ngày (giữ lại 1 ngày để client nhận lỗi "hết hạn" thay vì
- * "không tìm thấy") và nhật ký gửi mã cũ hơn 1 ngày.
+ * Mỗi giờ xóa dữ liệu tạm đã hết hạn quá 1 ngày (giữ lại 1 ngày để client nhận lỗi "hết hạn" thay vì
+ * "không tìm thấy"): phiên đăng ký, nhật ký gửi mã, yêu cầu đổi mật khẩu.
  */
 @Component
-class RegistrationCleanupJob {
-    private static final Logger log = LoggerFactory.getLogger(RegistrationCleanupJob.class);
+class AuthCleanupJob {
+    private static final Logger log = LoggerFactory.getLogger(AuthCleanupJob.class);
 
     private final RegistrationSessionRepository sessions;
     private final RegistrationOtpSendRepository otpSends;
+    private final PasswordChangeRequestRepository passwordChanges;
     private final Clock clock;
 
-    RegistrationCleanupJob(RegistrationSessionRepository sessions, RegistrationOtpSendRepository otpSends,
-            Clock clock) {
+    AuthCleanupJob(RegistrationSessionRepository sessions, RegistrationOtpSendRepository otpSends,
+            PasswordChangeRequestRepository passwordChanges, Clock clock) {
         this.sessions = sessions;
         this.otpSends = otpSends;
+        this.passwordChanges = passwordChanges;
         this.clock = clock;
     }
 
@@ -37,8 +40,10 @@ class RegistrationCleanupJob {
         var cutoff = clock.instant().minus(Duration.ofDays(1));
         int deletedSessions = sessions.deleteExpiredBefore(cutoff);
         int deletedSends = otpSends.deleteSentBefore(cutoff);
-        if (deletedSessions + deletedSends > 0) {
-            log.info("Đã xóa {} phiên đăng ký hết hạn, {} bản ghi gửi mã", deletedSessions, deletedSends);
+        int deletedChanges = passwordChanges.deleteExpiredBefore(cutoff);
+        if (deletedSessions + deletedSends + deletedChanges > 0) {
+            log.info("Dọn dẹp: {} phiên đăng ký, {} bản ghi gửi mã, {} yêu cầu đổi mật khẩu",
+                    deletedSessions, deletedSends, deletedChanges);
         }
     }
 }

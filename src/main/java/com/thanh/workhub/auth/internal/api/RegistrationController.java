@@ -18,7 +18,7 @@ import com.thanh.workhub.auth.internal.api.dto.CompleteRegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.InitiateRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.RegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.StartRegistrationRequest;
-import com.thanh.workhub.auth.internal.api.dto.VerifyRegistrationRequest;
+import com.thanh.workhub.auth.internal.api.dto.VerifyOtpRequest;
 import com.thanh.workhub.auth.internal.application.RegistrationService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,7 +70,7 @@ public class RegistrationController {
     /** Bước 3 – Xác thực mã. */
     @PostMapping("/{id}/verify")
     public RegistrationResponse verify(@PathVariable UUID id,
-            @Valid @RequestBody VerifyRegistrationRequest request) {
+            @Valid @RequestBody VerifyOtpRequest request) {
         return registrationService.verify(id, request);
     }
 

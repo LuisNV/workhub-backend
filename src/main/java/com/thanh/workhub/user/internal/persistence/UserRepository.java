@@ -17,4 +17,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByPhoneAndIdNot(String phone, Long id);
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
+
+    /**
+     * Khóa kiểm tra mật khẩu của một user trong transaction hiện tại (Postgres advisory lock, không khóa dòng),
+     * để nhiều request song song không cùng lọt qua giới hạn số lần sai. Tự nhả khi transaction kết thúc.
+     */
+    @Query(value = "select 1 from (select pg_advisory_xact_lock(:namespace, :key)) as locked", nativeQuery = true)
+    Integer lockPasswordCheck(@Param("namespace") int namespace, @Param("key") int key);
 }

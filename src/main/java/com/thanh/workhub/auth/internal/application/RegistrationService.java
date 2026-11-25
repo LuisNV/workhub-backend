@@ -1,13 +1,8 @@
 package com.thanh.workhub.auth.internal.application;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HexFormat;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -21,7 +16,7 @@ import com.thanh.workhub.auth.internal.api.dto.CompleteRegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.InitiateRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.RegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.StartRegistrationRequest;
-import com.thanh.workhub.auth.internal.api.dto.VerifyRegistrationRequest;
+import com.thanh.workhub.auth.internal.api.dto.VerifyOtpRequest;
 import com.thanh.workhub.auth.internal.domain.DeviceInfo;
 import com.thanh.workhub.auth.internal.domain.RegistrationOtpSend;
 import com.thanh.workhub.auth.internal.domain.RegistrationSession;
@@ -53,7 +48,6 @@ public class RegistrationService {
     private final EmailSender emailSender;
     private final RefreshTokenService refreshTokenService;
     private final Clock clock;
-    private final SecureRandom random = new SecureRandom();
 
     private final Duration sessionTtl;
     private final Duration otpTtl;
@@ -66,10 +60,10 @@ public class RegistrationService {
             UserApi userApi, PasswordEncoder passwordEncoder, EmailSender emailSender,
             RefreshTokenService refreshTokenService, Clock clock,
             @Value("${app.registration.session-ttl-minutes}") long sessionTtlMinutes,
-            @Value("${app.registration.otp-ttl-minutes}") long otpTtlMinutes,
-            @Value("${app.registration.otp-resend-cooldown-seconds}") long resendCooldownSeconds,
-            @Value("${app.registration.otp-max-attempts}") int maxAttempts,
-            @Value("${app.registration.otp-max-sends}") int maxSendsPerSession,
+            @Value("${app.otp.ttl-minutes}") long otpTtlMinutes,
+            @Value("${app.otp.resend-cooldown-seconds}") long resendCooldownSeconds,
+            @Value("${app.otp.max-attempts}") int maxAttempts,
+            @Value("${app.otp.max-sends}") int maxSendsPerSession,
             @Value("${app.registration.otp-max-sends-per-email-per-hour}") int maxSendsPerEmailPerHour) {
         this.sessions = sessions;
         this.otpSends = otpSends;
@@ -114,7 +108,7 @@ public class RegistrationService {
     @Transactional
     public RegistrationResponse initiate(UUID id, InitiateRegistrationRequest request) {
         var session = load(id);
-        validatePassword(request.password(), request.confirmPassword());
+        PasswordPolicy.validate(request.password(), request.confirmPassword());
         session.setPassword(passwordEncoder.encode(request.password()), request.biometricEnabled());
         // Quay lại bước 2 để đổi mật khẩu thì giữ mã đã gửi, không gửi thêm mail.
         if (session.getStatus() == RegistrationStatus.CREATED) {
@@ -155,7 +149,7 @@ public class RegistrationService {
 
     /** Lần nhập sai phải được lưu lại dù ném lỗi, nên không rollback khi gặp ApiException. */
     @Transactional(noRollbackFor = ApiException.class)
-    public RegistrationResponse verify(UUID id, VerifyRegistrationRequest request) {
+    public RegistrationResponse verify(UUID id, VerifyOtpRequest request) {
         var session = load(id);
         // Client gửi lại request sau khi đã xác thực thành công: trả kết quả cũ.
         if (session.getStatus() == RegistrationStatus.VERIFIED) return toResponse(session);
@@ -163,9 +157,7 @@ public class RegistrationService {
         if (session.getOtpAttempts() >= maxAttempts) throw new ApiException(ErrorCode.OTP_TOO_MANY_ATTEMPTS);
         if (!now().isBefore(session.getOtpExpiresAt())) throw new ApiException(ErrorCode.OTP_EXPIRED);
 
-        byte[] expected = session.getOtpHash().getBytes(StandardCharsets.US_ASCII);
-        byte[] actual = hashOtp(session.getId(), request.code()).getBytes(StandardCharsets.US_ASCII);
-        if (!MessageDigest.isEqual(expected, actual)) {
+        if (!OtpCodes.matches(session.getOtpHash(), session.getId(), request.code())) {
             session.otpFailed();
             int remaining = maxAttempts - session.getOtpAttempts();
             if (remaining <= 0) throw new ApiException(ErrorCode.OTP_TOO_MANY_ATTEMPTS);
@@ -211,28 +203,15 @@ public class RegistrationService {
             throw new ApiException(ErrorCode.OTP_SEND_LIMIT_REACHED,
                     "Email này đã nhận quá nhiều mã, vui lòng thử lại sau 1 giờ");
         }
-        String code = "%06d".formatted(random.nextInt(1_000_000));
-        session.otpIssued(hashOtp(session.getId(), code), now, otpTtl);
+        String code = OtpCodes.generate();
+        session.otpIssued(OtpCodes.hash(session.getId(), code), now, otpTtl);
         otpSends.save(new RegistrationOtpSend(session.getEmail(), now));
-        emailSender.send(RegistrationEmails.otp(session.getEmail(), session.getFullName(), code, otpTtl));
+        emailSender.send(AuthEmails.registrationOtp(session.getEmail(), session.getFullName(), code, otpTtl));
     }
 
     private void ensureEmailAvailable(String email) {
         if (userApi.findCredentialsByEmail(email).isPresent()) {
             throw new ApiException(ErrorCode.EMAIL_ALREADY_USED);
-        }
-    }
-
-    private void validatePassword(String password, String confirmPassword) {
-        if (!password.equals(confirmPassword)) throw new ApiException(ErrorCode.PASSWORD_CONFIRMATION_MISMATCH);
-        boolean strong = password.length() >= 8
-                && password.chars().anyMatch(Character::isUpperCase)
-                && password.chars().anyMatch(Character::isLowerCase)
-                && password.chars().anyMatch(Character::isDigit);
-        if (!strong) throw new ApiException(ErrorCode.PASSWORD_TOO_WEAK);
-        // BCrypt chỉ dùng 72 byte đầu; chữ có dấu chiếm nhiều byte nên kiểm tra theo byte.
-        if (password.getBytes(StandardCharsets.UTF_8).length > 72) {
-            throw new ApiException(ErrorCode.PASSWORD_TOO_WEAK, "Mật khẩu quá dài");
         }
     }
 
@@ -271,16 +250,5 @@ public class RegistrationService {
     /** "091 234 5678" → "0912345678". */
     static String normalizePhone(String phone) {
         return phone.replaceAll("\\s+", "");
-    }
-
-    /** Gắn ID phiên vào hash để cùng một mã ở hai phiên khác nhau cho ra hash khác nhau. */
-    static String hashOtp(UUID sessionId, String code) {
-        try {
-            byte[] digest = MessageDigest.getInstance("SHA-256")
-                    .digest((sessionId + ":" + code).getBytes(StandardCharsets.UTF_8));
-            return HexFormat.of().formatHex(digest);
-        } catch (NoSuchAlgorithmException exception) {
-            throw new IllegalStateException("SHA-256 unavailable", exception);
-        }
     }
 }

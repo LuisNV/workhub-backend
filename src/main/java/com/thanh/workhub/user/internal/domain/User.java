@@ -37,6 +37,10 @@ public class User {
     @Column(name = "avatar_url", length = 2048)
     private String avatarUrl;
 
+    public void changePassword(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
     public void changeEmail(String email) {
         this.email = email;
         this.emailVerified = false;

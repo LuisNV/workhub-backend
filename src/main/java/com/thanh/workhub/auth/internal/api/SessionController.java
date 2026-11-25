@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.thanh.workhub.auth.internal.api.dto.LoginSessionResponse;
 import com.thanh.workhub.auth.internal.application.LoginSessionService;
 import com.thanh.workhub.platform.security.CurrentUserId;
-import com.thanh.workhub.platform.security.JwtService;
 
 /** Quản lý thiết bị đăng nhập của chính user đang gọi. */
 @RestController
@@ -31,7 +30,7 @@ public class SessionController {
 
     @GetMapping
     public List<LoginSessionResponse> list(@CurrentUserId Long userId, @AuthenticationPrincipal Jwt jwt) {
-        return loginSessions.list(userId, currentSessionId(jwt));
+        return loginSessions.list(userId, CurrentSession.id(jwt));
     }
 
     @DeleteMapping("/{id}")
@@ -42,17 +41,6 @@ public class SessionController {
 
     @PostMapping("/revoke-others")
     public Map<String, Integer> revokeOthers(@CurrentUserId Long userId, @AuthenticationPrincipal Jwt jwt) {
-        return Map.of("revokedCount", loginSessions.revokeOthers(userId, currentSessionId(jwt)));
-    }
-
-    /** Access token phát trước khi có tính năng này không có claim sid. */
-    private static UUID currentSessionId(Jwt jwt) {
-        String sid = jwt == null ? null : jwt.getClaimAsString(JwtService.SESSION_ID_CLAIM);
-        if (sid == null) return null;
-        try {
-            return UUID.fromString(sid);
-        } catch (IllegalArgumentException exception) {
-            return null;
-        }
+        return Map.of("revokedCount", loginSessions.revokeOthers(userId, CurrentSession.id(jwt)));
     }
 }

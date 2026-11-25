@@ -34,7 +34,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.thanh.workhub.auth.internal.api.dto.ChangeRegistrationEmailRequest;
 import com.thanh.workhub.auth.internal.api.dto.InitiateRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.StartRegistrationRequest;
-import com.thanh.workhub.auth.internal.api.dto.VerifyRegistrationRequest;
+import com.thanh.workhub.auth.internal.api.dto.VerifyOtpRequest;
 import com.thanh.workhub.auth.internal.application.RefreshTokenService;
 import com.thanh.workhub.auth.internal.application.RegistrationService;
 import com.thanh.workhub.auth.internal.domain.RegistrationSession;
@@ -292,7 +292,7 @@ class RegistrationServiceTest {
     }
 
     private com.thanh.workhub.auth.internal.api.dto.RegistrationResponse verifyCode(UUID id, String code) {
-        return service.verify(id, new VerifyRegistrationRequest(code));
+        return service.verify(id, new VerifyOtpRequest(code));
     }
 
     private String lastCode() {

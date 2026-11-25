@@ -11,12 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
+    /** Limiter giả: không khóa, sai mật khẩu trả lỗi 1002 như thật. */
+    private static PasswordAttemptLimiter limiter() {
+        var limiter = mock(PasswordAttemptLimiter.class);
+        when(limiter.recordFailure(any())).thenReturn(new com.thanh.workhub.platform.web.ApiException(
+                com.thanh.workhub.platform.web.ErrorCode.CURRENT_PASSWORD_INCORRECT));
+        return limiter;
+    }
+
     @Test void updatesProfileAndPreservesEmailAndAvatar() {
         var repository = mock(UserRepository.class);
         var user = new User("Old", "original@example.com", "123", "Old address");
         user.updateAvatar("avatar-id", "https://example.com/avatar.png");
         when(repository.findById(7L)).thenReturn(Optional.of(user));
-        var service = new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class));
+        var service = new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class), limiter());
         var result = service.updateProfile(7L, new UpdateProfileRequest(
                 " New name ", " 0901234567 ", " New address ", "OTHER", LocalDate.of(2000, 1, 1)));
         assertEquals("New name", result.fullName());
@@ -35,7 +43,7 @@ class UserServiceTest {
     @Test void missingUserIsNotFound() {
         var repository = mock(UserRepository.class);
         when(repository.findById(99L)).thenReturn(Optional.empty());
-        assertThrows(UserNotFoundException.class, () -> new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class)).updateProfile(
+        assertThrows(UserNotFoundException.class, () -> new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class), limiter()).updateProfile(
                 99L, new UpdateProfileRequest("Name", "123", "Address", null, null)));
         verify(repository, never()).saveAndFlush(any());
     }
@@ -44,7 +52,7 @@ class UserServiceTest {
         var encoder = mock(org.springframework.security.crypto.password.PasswordEncoder.class);
         var user = new User("Old", "old@example.com", "123", "Old address");
         when(repository.findById(7L)).thenReturn(Optional.of(user));
-        var service = new UserService(repository, encoder);
+        var service = new UserService(repository, encoder, limiter());
         for (String password : new String[]{null, "", "   "}) {
             var exception = assertThrows(com.thanh.workhub.platform.web.ApiException.class,
                 () -> service.updateProfile(7L, new UpdateProfileRequest(
@@ -62,7 +70,7 @@ class UserServiceTest {
         var encoder = mock(org.springframework.security.crypto.password.PasswordEncoder.class);
         var user = new User("Old", "old@example.com", "123", "Old address");
         when(repository.findById(7L)).thenReturn(Optional.of(user));
-        var service = new UserService(repository, encoder);
+        var service = new UserService(repository, encoder, limiter());
         var request = new UpdateProfileRequest("New", "456", "Address", null, null,
                 "NEW@example.com", "password");
         assertEquals(1002, assertThrows(com.thanh.workhub.platform.web.ApiException.class,
@@ -86,7 +94,7 @@ class UserServiceTest {
         var encoder = mock(org.springframework.security.crypto.password.PasswordEncoder.class);
         var user = new User("Old", "old@example.com", "123", "Address");
         when(repository.findById(7L)).thenReturn(Optional.of(user));
-        new UserService(repository, encoder).updateProfile(7L, new UpdateProfileRequest(
+        new UserService(repository, encoder, limiter()).updateProfile(7L, new UpdateProfileRequest(
                 "New", "123", "Address", null, null, "OLD@example.com", null));
         verifyNoInteractions(encoder);
         verify(repository, never()).existsByEmail(any());
@@ -100,7 +108,7 @@ class UserServiceTest {
         when(encoder.matches("password", null)).thenReturn(true);
         when(repository.existsByPhoneAndIdNot("456", 7L)).thenReturn(true);
         var error = assertThrows(com.thanh.workhub.platform.web.ApiException.class,
-            () -> new UserService(repository, encoder).updateProfile(7L, new UpdateProfileRequest(
+            () -> new UserService(repository, encoder, limiter()).updateProfile(7L, new UpdateProfileRequest(
                 "New", " 456 ", "New address", null, null, "new@example.com", "password")));
         assertEquals(1004, error.getCode());
         assertEquals("Old", user.getFullName());
@@ -113,7 +121,7 @@ class UserServiceTest {
         var repository = mock(UserRepository.class);
         var user = new User("Old", "old@example.com", "123", "Address");
         when(repository.findById(7L)).thenReturn(Optional.of(user));
-        new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class))
+        new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class), limiter())
             .updateProfile(7L, new UpdateProfileRequest("New", " 123 ", "Address", null, null));
         verify(repository).existsByPhoneAndIdNot("123", 7L);
         verify(repository).saveAndFlush(user);
@@ -127,7 +135,7 @@ class UserServiceTest {
             "duplicate", new org.hibernate.exception.ConstraintViolationException(
                 "duplicate", new java.sql.SQLException("duplicate", "23505"), "uk_app_users_phone")));
         var error = assertThrows(com.thanh.workhub.platform.web.ApiException.class,
-            () -> new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class))
+            () -> new UserService(repository, mock(org.springframework.security.crypto.password.PasswordEncoder.class), limiter())
                 .updateProfile(7L, new UpdateProfileRequest("Name", "456", "Address", null, null)));
         assertEquals(1004, error.getCode());
     }

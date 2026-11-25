@@ -25,11 +25,17 @@ public class UserService implements UserApi {
     private static final String EMAIL_UNIQUE_CONSTRAINT = "app_users_email_key";
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    /** Không gian khóa advisory riêng cho kiểm tra mật khẩu. */
+    private static final int PASSWORD_CHECK_LOCK_NAMESPACE = 0x50574348; // "PWCH"
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final PasswordEncoder passwordEncoder;
+    private final PasswordAttemptLimiter attemptLimiter;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+            PasswordAttemptLimiter attemptLimiter) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.attemptLimiter = attemptLimiter;
     }
 
     @Override
@@ -68,9 +74,7 @@ public class UserService implements UserApi {
             if (request.currentPassword() == null || request.currentPassword().isBlank()) {
                 throw new ApiException(ErrorCode.CURRENT_PASSWORD_REQUIRED);
             }
-            if (!passwordEncoder.matches(request.currentPassword(), user.getPasswordHash())) {
-                throw new ApiException(ErrorCode.CURRENT_PASSWORD_INCORRECT);
-            }
+            verifyCurrentPassword(id, request.currentPassword());
             if (userRepository.existsByEmail(email)) {
                 throw new ApiException(ErrorCode.EMAIL_ALREADY_USED);
             }
@@ -100,6 +104,26 @@ public class UserService implements UserApi {
                 newUser.dateOfBirth(), newUser.passwordHash());
         saveHandlingUniqueViolations(user);
         return toProfile(user);
+    }
+
+    @Override
+    @Transactional
+    public void verifyCurrentPassword(Long userId, String rawPassword) {
+        userRepository.lockPasswordCheck(PASSWORD_CHECK_LOCK_NAMESPACE, Long.hashCode(userId));
+        var user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        attemptLimiter.ensureNotLocked(userId);
+        if (rawPassword == null || !passwordEncoder.matches(rawPassword, user.getPasswordHash())) {
+            throw attemptLimiter.recordFailure(userId);
+        }
+        attemptLimiter.reset(userId);
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(Long userId, String newPasswordHash) {
+        var user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        user.changePassword(newPasswordHash);
+        userRepository.saveAndFlush(user);
     }
 
     private void saveHandlingUniqueViolations(User user) {

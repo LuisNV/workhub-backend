@@ -66,13 +66,21 @@ app:
   auth:
     # Số thiết bị đăng nhập cùng lúc. Đăng nhập thiết bị mới khi đã đủ thì thiết bị lâu không dùng nhất bị đăng xuất.
     max-sessions-per-user: 5
+  # Mã OTP gửi qua email, dùng chung cho đăng ký và đổi mật khẩu.
+  otp:
+    ttl-minutes: 10
+    resend-cooldown-seconds: 45
+    max-attempts: 5
+    max-sends: 5
   registration:
     session-ttl-minutes: 60
-    otp-ttl-minutes: 10
-    otp-resend-cooldown-seconds: 45
-    otp-max-attempts: 5
-    otp-max-sends: 5
     otp-max-sends-per-email-per-hour: 10
+  password-change:
+    request-ttl-minutes: 15
+    # Nhập sai mật khẩu hiện tại quá số lần này trong cửa sổ khóa thì bị khóa đổi mật khẩu.
+    max-current-password-attempts: 5
+    lockout-minutes: 15
+    max-requests-per-hour: 5
   jwt:
     secret-base64: ${JWT_SECRET_BASE64}
     issuer: workhub-backend
