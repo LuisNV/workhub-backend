@@ -32,12 +32,28 @@ public enum ErrorCode {
     INTERNAL_ERROR(500, HttpStatus.INTERNAL_SERVER_ERROR, "Lỗi hệ thống"),
     STORAGE_UPLOAD_FAILED(502, HttpStatus.BAD_GATEWAY, "Không thể upload ảnh lên Cloudinary"),
     STORAGE_DISABLED(503, HttpStatus.SERVICE_UNAVAILABLE, "Cloudinary chưa được bật"),
+    MAIL_SEND_FAILED(502, HttpStatus.BAD_GATEWAY, "Không thể gửi email, vui lòng thử lại"),
+    MAIL_DISABLED(503, HttpStatus.SERVICE_UNAVAILABLE, "Chức năng gửi email chưa được bật"),
 
     // Lỗi nghiệp vụ: code >= 1000
     CURRENT_PASSWORD_REQUIRED(1001, HttpStatus.CONFLICT, "Vui lòng nhập mật khẩu hiện tại để đổi email"),
     CURRENT_PASSWORD_INCORRECT(1002, HttpStatus.BAD_REQUEST, "Mật khẩu hiện tại không đúng"),
     EMAIL_ALREADY_USED(1003, HttpStatus.CONFLICT, "Email đã được sử dụng"),
-    PHONE_ALREADY_USED(1004, HttpStatus.CONFLICT, "Số điện thoại đã được sử dụng");
+    PHONE_ALREADY_USED(1004, HttpStatus.CONFLICT, "Số điện thoại đã được sử dụng"),
+
+    // Đăng ký tài khoản
+    REGISTRATION_NOT_FOUND(1005, HttpStatus.NOT_FOUND, "Không tìm thấy phiên đăng ký"),
+    REGISTRATION_EXPIRED(1006, HttpStatus.GONE, "Phiên đăng ký đã hết hạn, vui lòng đăng ký lại"),
+    REGISTRATION_INVALID_STEP(1007, HttpStatus.CONFLICT, "Bước đăng ký không hợp lệ"),
+    PASSWORD_CONFIRMATION_MISMATCH(1008, HttpStatus.BAD_REQUEST, "Mật khẩu nhập lại không khớp"),
+    PASSWORD_TOO_WEAK(1009, HttpStatus.BAD_REQUEST,
+            "Mật khẩu cần ít nhất 8 ký tự, có chữ hoa, chữ thường và ít nhất 1 chữ số"),
+    OTP_INVALID(1010, HttpStatus.BAD_REQUEST, "Mã xác thực không đúng"),
+    OTP_EXPIRED(1011, HttpStatus.BAD_REQUEST, "Mã xác thực đã hết hạn, vui lòng gửi lại mã"),
+    OTP_TOO_MANY_ATTEMPTS(1012, HttpStatus.TOO_MANY_REQUESTS, "Nhập sai quá nhiều lần, vui lòng gửi lại mã mới"),
+    OTP_RESEND_TOO_SOON(1013, HttpStatus.TOO_MANY_REQUESTS, "Vui lòng chờ trước khi gửi lại mã"),
+    OTP_SEND_LIMIT_REACHED(1014, HttpStatus.TOO_MANY_REQUESTS,
+            "Đã gửi mã quá nhiều lần, vui lòng tạo phiên đăng ký mới");
 
     private final int code;
     private final HttpStatus status;

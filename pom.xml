@@ -89,6 +89,12 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
+        <!-- 6. Gửi email (Gmail SMTP) cho mã xác thực đăng ký -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- 3. Validation: @Valid, @Email, @NotBlank -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

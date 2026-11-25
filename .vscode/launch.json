@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "WorkhubApplication",
+      "request": "launch",
+      "mainClass": "WorkhubApplication",
+      "projectName": "workhub-backend"
+    },
+    {
+      "type": "java",
       "name": "Run Workhub",
       "request": "launch",
       "mainClass": "com.thanh.workhub.WorkhubApplication",

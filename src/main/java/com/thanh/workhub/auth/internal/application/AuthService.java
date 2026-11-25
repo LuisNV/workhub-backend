@@ -36,7 +36,7 @@ public class AuthService {
 
         UserCredentials user = (loginByEmail
                 ? userApi.findCredentialsByEmail(identifier.toLowerCase(Locale.ROOT))
-                : userApi.findCredentialsByPhone(identifier))
+                : userApi.findCredentialsByPhone(identifier.replaceAll("\\s+", "")))
                 .orElseThrow(() -> new ApiException(ErrorCode.INVALID_CREDENTIALS));
 
         if (!passwordEncoder.matches(request.password(), user.passwordHash())) {

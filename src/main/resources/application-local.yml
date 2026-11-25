@@ -3,6 +3,9 @@ spring:
   flyway:
     locations: classpath:db/migration,classpath:db/local
 app:
+  mail:
+    # Khi MAIL_ENABLED=false, in email (kèm mã OTP) ra console thay vì báo lỗi. Chỉ dùng trên máy cá nhân.
+    log-only: true
   jwt:
     # Khóa chỉ dùng học trên máy cá nhân (32 byte). Môi trường khác phải đặt JWT_SECRET_BASE64.
     secret-base64: ${JWT_SECRET_BASE64:w+C+xqk94kyDKqeXm8+6eVBc4CTmHEDs1iRkxb5mUmE=}

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thanh.workhub.platform.web.ApiException;
 import com.thanh.workhub.platform.web.ErrorCode;
+import com.thanh.workhub.user.NewUser;
 import com.thanh.workhub.user.UserApi;
 import com.thanh.workhub.user.UserCredentials;
 import com.thanh.workhub.user.UserProfileResponse;
@@ -21,6 +22,7 @@ import com.thanh.workhub.user.internal.persistence.UserRepository;
 @Service
 public class UserService implements UserApi {
     private static final String PHONE_UNIQUE_CONSTRAINT = "uk_app_users_phone";
+    private static final String EMAIL_UNIQUE_CONSTRAINT = "app_users_email_key";
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -73,26 +75,50 @@ public class UserService implements UserApi {
                 throw new ApiException(ErrorCode.EMAIL_ALREADY_USED);
             }
         }
-        String phone = request.phone().strip();
+        // Số điện thoại lưu dạng chỉ có chữ số ("091 234 5678" → "0912345678") để so trùng và đăng nhập.
+        String phone = request.phone().replaceAll("\\s+", "");
         if (userRepository.existsByPhoneAndIdNot(phone, id)) {
             throw new ApiException(ErrorCode.PHONE_ALREADY_USED);
         }
         if (emailChanged) user.changeEmail(email);
         user.updateProfile(request.fullName().strip(), phone, request.address().strip(),
                 request.gender(), request.dateOfBirth());
+        saveHandlingUniqueViolations(user);
+        return toProfile(user);
+    }
+
+    @Override
+    @Transactional
+    public UserProfileResponse register(NewUser newUser) {
+        if (userRepository.existsByEmail(newUser.email())) {
+            throw new ApiException(ErrorCode.EMAIL_ALREADY_USED);
+        }
+        if (userRepository.existsByPhone(newUser.phone())) {
+            throw new ApiException(ErrorCode.PHONE_ALREADY_USED);
+        }
+        var user = User.registered(newUser.fullName(), newUser.email(), newUser.phone(),
+                newUser.dateOfBirth(), newUser.passwordHash());
+        saveHandlingUniqueViolations(user);
+        return toProfile(user);
+    }
+
+    private void saveHandlingUniqueViolations(User user) {
         try {
             userRepository.saveAndFlush(user);
         } catch (DataIntegrityViolationException exception) {
-            // Unique constraint xử lý cả hai request cùng chọn một số điện thoại.
+            // Unique constraint xử lý trường hợp hai request cùng lúc chọn một email / số điện thoại.
             for (Throwable cause = exception; cause != null; cause = cause.getCause()) {
-                if (cause instanceof ConstraintViolationException violation
-                        && PHONE_UNIQUE_CONSTRAINT.equals(violation.getConstraintName())) {
-                    throw new ApiException(ErrorCode.PHONE_ALREADY_USED);
+                if (cause instanceof ConstraintViolationException violation) {
+                    if (PHONE_UNIQUE_CONSTRAINT.equals(violation.getConstraintName())) {
+                        throw new ApiException(ErrorCode.PHONE_ALREADY_USED);
+                    }
+                    if (EMAIL_UNIQUE_CONSTRAINT.equals(violation.getConstraintName())) {
+                        throw new ApiException(ErrorCode.EMAIL_ALREADY_USED);
+                    }
                 }
             }
             throw new ApiException(ErrorCode.DATA_CONFLICT);
         }
-        return toProfile(user);
     }
 
     private static UserCredentials toCredentials(User user) {

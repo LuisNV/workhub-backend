@@ -26,7 +26,7 @@ public class User {
     private boolean emailVerified;
     @Column(nullable = false, unique = true, length = 30)
     private String phone;
-    @Column(nullable = false, length = 500)
+    @Column(length = 500)
     private String address;
     @Column(length = 30)
     private String gender;
@@ -62,6 +62,16 @@ public class User {
 
     protected User() {
     } // JPA cần constructor không tham số.
+
+    /** User tạo từ luồng đăng ký: email đã xác thực bằng OTP, địa chỉ bổ sung sau. */
+    public static User registered(String fullName, String email, String phone, LocalDate dateOfBirth,
+            String passwordHash) {
+        var user = new User(fullName, email, phone, null);
+        user.dateOfBirth = dateOfBirth;
+        user.passwordHash = passwordHash;
+        user.emailVerified = true;
+        return user;
+    }
 
     public User(
             String fullName,

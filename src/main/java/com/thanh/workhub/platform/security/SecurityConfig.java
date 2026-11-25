@@ -138,6 +138,12 @@ public class SecurityConfig {
                     "/api/v1/auth/logout"
                 ).permitAll()
 
+                // Đăng ký tài khoản mới (chưa có token)
+                .requestMatchers(
+                    "/api/v1/auth/registrations",
+                    "/api/v1/auth/registrations/**"
+                ).permitAll()
+
                 // Health check công khai
                 .requestMatchers(
                     HttpMethod.GET,
