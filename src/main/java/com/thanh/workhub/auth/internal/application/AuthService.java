@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thanh.workhub.auth.internal.api.dto.LoginRequest;
 import com.thanh.workhub.auth.internal.api.dto.LoginResponse;
-import com.thanh.workhub.platform.security.JwtService;
+import com.thanh.workhub.auth.internal.domain.DeviceInfo;
 import com.thanh.workhub.platform.web.ApiException;
 import com.thanh.workhub.platform.web.ErrorCode;
 import com.thanh.workhub.user.UserApi;
@@ -18,19 +18,17 @@ import com.thanh.workhub.user.UserCredentials;
 public class AuthService {
     private final UserApi userApi;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
 
-    public AuthService(UserApi userApi, PasswordEncoder passwordEncoder, JwtService jwtService,
+    public AuthService(UserApi userApi, PasswordEncoder passwordEncoder,
             RefreshTokenService refreshTokenService) {
         this.userApi = userApi;
         this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
     }
 
     @Transactional
-    public LoginResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request, DeviceInfo device) {
         String identifier = request.identifier().trim();
         boolean loginByEmail = identifier.contains("@");
 
@@ -46,8 +44,6 @@ public class AuthService {
             throw new ApiException(ErrorCode.EMAIL_NOT_VERIFIED);
         }
 
-        String accessToken = jwtService.generateAccessToken(user.id(), user.email());
-        String refreshToken = refreshTokenService.create(user.id());
-        return new LoginResponse(accessToken, refreshToken, "Bearer", jwtService.getExpiresInSeconds());
+        return refreshTokenService.create(user.id(), user.email(), device);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thanh.workhub.auth.internal.api.dto.ChangeRegistrationEmailRequest;
+import com.thanh.workhub.auth.internal.api.dto.CompleteRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.CompleteRegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.InitiateRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.RegistrationResponse;
@@ -20,6 +21,7 @@ import com.thanh.workhub.auth.internal.api.dto.StartRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.VerifyRegistrationRequest;
 import com.thanh.workhub.auth.internal.application.RegistrationService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 /** Đăng ký tài khoản mới. Không cần JWT; {@code registrationId} đóng vai trò khóa của phiên. */
@@ -74,7 +76,10 @@ public class RegistrationController {
 
     /** Bước 4 – Hoàn tất: tạo tài khoản và đăng nhập luôn. */
     @PostMapping("/{id}/complete")
-    public CompleteRegistrationResponse complete(@PathVariable UUID id) {
-        return registrationService.complete(id);
+    public CompleteRegistrationResponse complete(@PathVariable UUID id,
+            @Valid @RequestBody(required = false) CompleteRegistrationRequest request, HttpServletRequest http) {
+        var body = request == null ? new CompleteRegistrationRequest(null, null, null) : request;
+        return registrationService.complete(id,
+                DeviceInfoResolver.from(http, body.deviceId(), body.deviceName(), body.platform()));
     }
 }

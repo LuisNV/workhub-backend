@@ -53,7 +53,12 @@ public enum ErrorCode {
     OTP_TOO_MANY_ATTEMPTS(1012, HttpStatus.TOO_MANY_REQUESTS, "Nhập sai quá nhiều lần, vui lòng gửi lại mã mới"),
     OTP_RESEND_TOO_SOON(1013, HttpStatus.TOO_MANY_REQUESTS, "Vui lòng chờ trước khi gửi lại mã"),
     OTP_SEND_LIMIT_REACHED(1014, HttpStatus.TOO_MANY_REQUESTS,
-            "Đã gửi mã quá nhiều lần, vui lòng tạo phiên đăng ký mới");
+            "Đã gửi mã quá nhiều lần, vui lòng tạo phiên đăng ký mới"),
+
+    // Thiết bị đăng nhập
+    SESSION_NOT_FOUND(1015, HttpStatus.NOT_FOUND, "Không tìm thấy thiết bị đăng nhập"),
+    SESSION_UNKNOWN(1016, HttpStatus.BAD_REQUEST,
+            "Không xác định được thiết bị hiện tại, vui lòng đăng nhập lại");
 
     private final int code;
     private final HttpStatus status;

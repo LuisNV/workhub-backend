@@ -2,6 +2,7 @@ package com.thanh.workhub.platform.security;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -26,7 +27,10 @@ public class JwtService {
         this.accessTokenMinutes = accessTokenMinutes;
     }
 
-    public String generateAccessToken(Long userId, String email) {
+    /** Claim chứa ID phiên đăng nhập (thiết bị) đã phát access token này. */
+    public static final String SESSION_ID_CLAIM = "sid";
+
+    public String generateAccessToken(Long userId, String email, UUID sessionId) {
 
         Instant now = Instant.now();
 
@@ -41,6 +45,7 @@ public class JwtService {
             .expiresAt(expiresAt)
             .subject(userId.toString())
             .claim("email", email)
+            .claim(SESSION_ID_CLAIM, sessionId.toString())
             .build();
 
         JwsHeader header = JwsHeader

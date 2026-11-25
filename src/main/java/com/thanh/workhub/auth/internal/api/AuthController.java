@@ -18,6 +18,7 @@ import com.thanh.workhub.platform.web.ErrorCode;
 import com.thanh.workhub.user.UserApi;
 import com.thanh.workhub.user.UserProfileResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -35,13 +36,14 @@ public class AuthController {
 
     // Đăng nhập không cần JWT
     @PostMapping("/login")
-    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
-        return authService.login(request);
+    public LoginResponse login(@Valid @RequestBody LoginRequest request, HttpServletRequest http) {
+        return authService.login(request,
+                DeviceInfoResolver.from(http, request.deviceId(), request.deviceName(), request.platform()));
     }
 
     @PostMapping("/refresh")
-    public LoginResponse refresh(@Valid @RequestBody RefreshTokenRequest request) {
-        return refreshTokenService.refresh(request.refreshToken())
+    public LoginResponse refresh(@Valid @RequestBody RefreshTokenRequest request, HttpServletRequest http) {
+        return refreshTokenService.refresh(request.refreshToken(), DeviceInfoResolver.from(http, null, null, null))
                 .orElseThrow(() -> new ApiException(ErrorCode.INVALID_REFRESH_TOKEN));
     }
 

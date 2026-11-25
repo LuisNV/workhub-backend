@@ -19,17 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thanh.workhub.auth.internal.api.dto.ChangeRegistrationEmailRequest;
 import com.thanh.workhub.auth.internal.api.dto.CompleteRegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.InitiateRegistrationRequest;
-import com.thanh.workhub.auth.internal.api.dto.LoginResponse;
 import com.thanh.workhub.auth.internal.api.dto.RegistrationResponse;
 import com.thanh.workhub.auth.internal.api.dto.StartRegistrationRequest;
 import com.thanh.workhub.auth.internal.api.dto.VerifyRegistrationRequest;
+import com.thanh.workhub.auth.internal.domain.DeviceInfo;
 import com.thanh.workhub.auth.internal.domain.RegistrationOtpSend;
 import com.thanh.workhub.auth.internal.domain.RegistrationSession;
 import com.thanh.workhub.auth.internal.domain.RegistrationStatus;
 import com.thanh.workhub.auth.internal.persistence.RegistrationOtpSendRepository;
 import com.thanh.workhub.auth.internal.persistence.RegistrationSessionRepository;
 import com.thanh.workhub.platform.mail.EmailSender;
-import com.thanh.workhub.platform.security.JwtService;
 import com.thanh.workhub.platform.web.ApiException;
 import com.thanh.workhub.platform.web.ErrorCode;
 import com.thanh.workhub.user.NewUser;
@@ -52,7 +51,6 @@ public class RegistrationService {
     private final UserApi userApi;
     private final PasswordEncoder passwordEncoder;
     private final EmailSender emailSender;
-    private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final Clock clock;
     private final SecureRandom random = new SecureRandom();
@@ -65,7 +63,7 @@ public class RegistrationService {
     private final int maxSendsPerEmailPerHour;
 
     public RegistrationService(RegistrationSessionRepository sessions, RegistrationOtpSendRepository otpSends,
-            UserApi userApi, PasswordEncoder passwordEncoder, EmailSender emailSender, JwtService jwtService,
+            UserApi userApi, PasswordEncoder passwordEncoder, EmailSender emailSender,
             RefreshTokenService refreshTokenService, Clock clock,
             @Value("${app.registration.session-ttl-minutes}") long sessionTtlMinutes,
             @Value("${app.registration.otp-ttl-minutes}") long otpTtlMinutes,
@@ -78,7 +76,6 @@ public class RegistrationService {
         this.userApi = userApi;
         this.passwordEncoder = passwordEncoder;
         this.emailSender = emailSender;
-        this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
         this.clock = clock;
         this.sessionTtl = Duration.ofMinutes(sessionTtlMinutes);
@@ -182,7 +179,7 @@ public class RegistrationService {
     // ---- Bước 4: hoàn tất ----
 
     @Transactional
-    public CompleteRegistrationResponse complete(UUID id) {
+    public CompleteRegistrationResponse complete(UUID id, DeviceInfo device) {
         var session = load(id);
         session.ensureStatus(RegistrationStatus.VERIFIED);
         // UserApi kiểm tra trùng lần nữa: email/số điện thoại có thể đã bị người khác đăng ký trong lúc chờ.
@@ -190,9 +187,8 @@ public class RegistrationService {
                 session.getDateOfBirth(), session.getPasswordHash()));
         session.complete(user.id());
 
-        String accessToken = jwtService.generateAccessToken(user.id(), user.email());
-        String refreshToken = refreshTokenService.create(user.id());
-        var tokens = new LoginResponse(accessToken, refreshToken, "Bearer", jwtService.getExpiresInSeconds());
+        // Đăng nhập luôn trên thiết bị vừa đăng ký.
+        var tokens = refreshTokenService.create(user.id(), user.email(), device);
         return new CompleteRegistrationResponse(user, session.isBiometricEnabled(), tokens);
     }
 

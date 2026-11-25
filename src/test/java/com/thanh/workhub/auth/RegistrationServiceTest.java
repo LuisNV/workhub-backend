@@ -42,7 +42,8 @@ import com.thanh.workhub.auth.internal.persistence.RegistrationOtpSendRepository
 import com.thanh.workhub.auth.internal.persistence.RegistrationSessionRepository;
 import com.thanh.workhub.platform.mail.EmailMessage;
 import com.thanh.workhub.platform.mail.EmailSender;
-import com.thanh.workhub.platform.security.JwtService;
+import com.thanh.workhub.auth.internal.api.dto.LoginResponse;
+import com.thanh.workhub.auth.internal.domain.DeviceInfo;
 import com.thanh.workhub.platform.web.ApiException;
 import com.thanh.workhub.platform.web.ErrorCode;
 import com.thanh.workhub.user.NewUser;
@@ -60,12 +61,11 @@ class RegistrationServiceTest {
     private final UserApi users = mock(UserApi.class);
     private final PasswordEncoder passwords = mock(PasswordEncoder.class);
     private final EmailSender mail = mock(EmailSender.class);
-    private final JwtService jwt = mock(JwtService.class);
     private final RefreshTokenService refresh = mock(RefreshTokenService.class);
     private final List<EmailMessage> sent = new ArrayList<>();
 
     private final RegistrationService service = new RegistrationService(sessions, otpSends, users, passwords,
-            mail, jwt, refresh, clock, 60, 10, 45, 5, 5, 10);
+            mail, refresh, clock, 60, 10, 45, 5, 5, 10);
 
     @BeforeEach
     void setUp() {
@@ -233,7 +233,7 @@ class RegistrationServiceTest {
     void completeRequiresVerifiedEmail() {
         var id = startAndInitiate();
         assertEquals(ErrorCode.REGISTRATION_INVALID_STEP,
-                assertThrows(ApiException.class, () -> service.complete(id)).getErrorCode());
+                assertThrows(ApiException.class, () -> service.complete(id, DeviceInfo.UNKNOWN)).getErrorCode());
         verify(users, never()).register(any());
     }
 
@@ -243,11 +243,11 @@ class RegistrationServiceTest {
         verifyCode(id, lastCode());
         when(users.register(any())).thenReturn(new UserProfileResponse(42L, "Nguyễn Minh Anh",
                 "minhanh@gmail.com", "0912345678", null, null, LocalDate.of(2002, 3, 12), null, true));
-        when(jwt.generateAccessToken(42L, "minhanh@gmail.com")).thenReturn("access");
-        when(refresh.create(42L)).thenReturn("refresh");
-        when(jwt.getExpiresInSeconds()).thenReturn(900L);
+        var device = new DeviceInfo("device-1234", "iPhone", "iOS", null, null);
+        when(refresh.create(42L, "minhanh@gmail.com", device))
+                .thenReturn(new LoginResponse("access", "refresh", "Bearer", 900));
 
-        var result = service.complete(id);
+        var result = service.complete(id, device);
 
         var created = ArgumentCaptor.forClass(NewUser.class);
         verify(users).register(created.capture());
@@ -259,7 +259,7 @@ class RegistrationServiceTest {
 
         // Không hoàn tất được lần hai.
         assertEquals(ErrorCode.REGISTRATION_INVALID_STEP,
-                assertThrows(ApiException.class, () -> service.complete(id)).getErrorCode());
+                assertThrows(ApiException.class, () -> service.complete(id, DeviceInfo.UNKNOWN)).getErrorCode());
         verify(users, times(1)).register(any());
     }
 

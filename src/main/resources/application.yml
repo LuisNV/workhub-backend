@@ -63,6 +63,9 @@ app:
     enabled: ${MAIL_ENABLED:false}
     from: ${MAIL_FROM:${MAIL_USERNAME:}}
     from-name: ${MAIL_FROM_NAME:WorkHub}
+  auth:
+    # Số thiết bị đăng nhập cùng lúc. Đăng nhập thiết bị mới khi đã đủ thì thiết bị lâu không dùng nhất bị đăng xuất.
+    max-sessions-per-user: 5
   registration:
     session-ttl-minutes: 60
     otp-ttl-minutes: 10
