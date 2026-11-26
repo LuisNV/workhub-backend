@@ -57,3 +57,45 @@ POST http://localhost:8081/api/v1/auth/password-resets/{{forgot.response.body.da
 Content-Type: application/json
 
 {"resetToken": "{{forgotVerify.response.body.data.resetToken}}", "newPassword": "Matkhaumoi123", "confirmPassword": "Matkhaumoi123"}
+
+### ---- Từ vựng HSK (cần token) ----
+
+### Tab HSK 1–9 và thẻ tiến độ
+GET http://localhost:8081/api/v1/hsk/levels
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Danh sách từ HSK 1 (Tất cả), trang đầu
+GET http://localhost:8081/api/v1/hsk/levels/1/words?page=0&size=50
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Lọc: NOT_STARTED | LEARNING | MASTERED
+GET http://localhost:8081/api/v1/hsk/levels/1/words?status=LEARNING
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Chi tiết từ 你好
+GET http://localhost:8081/api/v1/hsk/levels/1/words/147
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Phát âm (không cần token)
+GET http://localhost:8081/audio/hsk/3.0-2025/1/147.m4a
+
+### Thẻ cho một lượt học: từ đến hạn ôn trước, sau đó từ mới (size 1–50, mặc định 20)
+GET http://localhost:8081/api/v1/hsk/levels/1/flashcards?size=20
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Ghi kết quả một lượt học thẻ (REMEMBERED | FORGOT). Số thứ tự từ: HSK 1 = 1–300, HSK 2 = 301–500, HSK 3 = 501–1000
+POST http://localhost:8081/api/v1/hsk/reviews
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+{"items": [
+  {"level": 1, "entryNumber": 147, "result": "REMEMBERED"},
+  {"level": 1, "entryNumber": 4, "result": "FORGOT"}
+]}
+
+### Tự đánh dấu một từ (NOT_STARTED | LEARNING | MASTERED)
+PUT http://localhost:8081/api/v1/hsk/levels/1/words/147/progress
+Authorization: Bearer {{login.response.body.data.accessToken}}
+Content-Type: application/json
+
+{"status": "MASTERED"}
