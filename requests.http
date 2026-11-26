@@ -32,3 +32,28 @@ GET http://localhost:8081/api/v1/users/1
 
 ### Health
 GET http://localhost:8081/actuator/health
+
+### ---- Quên mật khẩu (không cần token). Mã OTP in ra console khi chạy profile local. ----
+
+### 1. Nhập email hoặc số điện thoại, gửi mã
+# @name forgot
+POST http://localhost:8081/api/v1/auth/password-resets
+Content-Type: application/json
+
+{"identifier": "thanh.nguyen@example.com"}
+
+### 2a. Gửi lại mã (sau 45 giây)
+POST http://localhost:8081/api/v1/auth/password-resets/{{forgot.response.body.data.resetId}}/otp/resend
+
+### 2b. Nhập mã, nhận resetToken
+# @name forgotVerify
+POST http://localhost:8081/api/v1/auth/password-resets/{{forgot.response.body.data.resetId}}/verify
+Content-Type: application/json
+
+{"code": "123456"}
+
+### 3. Đặt mật khẩu mới (mọi thiết bị bị đăng xuất)
+POST http://localhost:8081/api/v1/auth/password-resets/{{forgot.response.body.data.resetId}}/complete
+Content-Type: application/json
+
+{"resetToken": "{{forgotVerify.response.body.data.resetToken}}", "newPassword": "Matkhaumoi123", "confirmPassword": "Matkhaumoi123"}

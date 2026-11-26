@@ -144,6 +144,13 @@ public class SecurityConfig {
                     "/api/v1/auth/registrations/**"
                 ).permitAll()
 
+                // Quên mật khẩu (chưa đăng nhập)
+                .requestMatchers(
+                    HttpMethod.POST,
+                    "/api/v1/auth/password-resets",
+                    "/api/v1/auth/password-resets/**"
+                ).permitAll()
+
                 // Health check công khai
                 .requestMatchers(
                     HttpMethod.GET,

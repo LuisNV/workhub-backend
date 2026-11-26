@@ -10,12 +10,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thanh.workhub.auth.internal.persistence.PasswordChangeRequestRepository;
+import com.thanh.workhub.auth.internal.persistence.PasswordResetRequestRepository;
 import com.thanh.workhub.auth.internal.persistence.RegistrationOtpSendRepository;
 import com.thanh.workhub.auth.internal.persistence.RegistrationSessionRepository;
 
 /**
  * Mỗi giờ xóa dữ liệu tạm đã hết hạn quá 1 ngày (giữ lại 1 ngày để client nhận lỗi "hết hạn" thay vì
- * "không tìm thấy"): phiên đăng ký, nhật ký gửi mã, yêu cầu đổi mật khẩu.
+ * "không tìm thấy"): phiên đăng ký, nhật ký gửi mã, yêu cầu đổi / đặt lại mật khẩu.
  */
 @Component
 class AuthCleanupJob {
@@ -24,13 +25,16 @@ class AuthCleanupJob {
     private final RegistrationSessionRepository sessions;
     private final RegistrationOtpSendRepository otpSends;
     private final PasswordChangeRequestRepository passwordChanges;
+    private final PasswordResetRequestRepository passwordResets;
     private final Clock clock;
 
     AuthCleanupJob(RegistrationSessionRepository sessions, RegistrationOtpSendRepository otpSends,
-            PasswordChangeRequestRepository passwordChanges, Clock clock) {
+            PasswordChangeRequestRepository passwordChanges, PasswordResetRequestRepository passwordResets,
+            Clock clock) {
         this.sessions = sessions;
         this.otpSends = otpSends;
         this.passwordChanges = passwordChanges;
+        this.passwordResets = passwordResets;
         this.clock = clock;
     }
 
@@ -41,9 +45,10 @@ class AuthCleanupJob {
         int deletedSessions = sessions.deleteExpiredBefore(cutoff);
         int deletedSends = otpSends.deleteSentBefore(cutoff);
         int deletedChanges = passwordChanges.deleteExpiredBefore(cutoff);
-        if (deletedSessions + deletedSends + deletedChanges > 0) {
-            log.info("Dọn dẹp: {} phiên đăng ký, {} bản ghi gửi mã, {} yêu cầu đổi mật khẩu",
-                    deletedSessions, deletedSends, deletedChanges);
+        int deletedResets = passwordResets.deleteExpiredBefore(cutoff);
+        if (deletedSessions + deletedSends + deletedChanges + deletedResets > 0) {
+            log.info("Dọn dẹp: {} phiên đăng ký, {} bản ghi gửi mã, {} yêu cầu đổi mật khẩu, {} yêu cầu đặt lại mật khẩu",
+                    deletedSessions, deletedSends, deletedChanges, deletedResets);
         }
     }
 }

@@ -81,6 +81,13 @@ app:
     max-current-password-attempts: 5
     lockout-minutes: 15
     max-requests-per-hour: 5
+  # Quên mật khẩu (chưa đăng nhập). Mã OTP dùng chung cấu hình app.otp.
+  password-reset:
+    request-ttl-minutes: 15
+    # Sau khi nhập đúng mã, có chừng này phút để đặt mật khẩu mới.
+    reset-token-ttl-minutes: 10
+    max-requests-per-identifier-per-hour: 5
+    max-requests-per-ip-per-hour: 20
   jwt:
     secret-base64: ${JWT_SECRET_BASE64}
     issuer: workhub-backend

@@ -11,5 +11,7 @@ public enum SessionRevokeReason {
     /** Refresh token đã thu hồi bị dùng lại: nghi bị đánh cắp, khóa cả phiên. */
     TOKEN_REUSE,
     /** Cùng máy (cùng deviceId) đăng nhập lại: phiên cũ được thay bằng phiên mới. */
-    REPLACED
+    REPLACED,
+    /** Đặt lại mật khẩu qua "Quên mật khẩu": mọi thiết bị bị đăng xuất. */
+    PASSWORD_RESET
 }

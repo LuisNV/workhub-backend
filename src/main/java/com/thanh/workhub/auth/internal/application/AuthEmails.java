@@ -6,7 +6,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import com.thanh.workhub.platform.mail.EmailMessage;
 
-/** Nội dung email của module auth (đăng ký, đổi mật khẩu). */
+/** Nội dung email của module auth (đăng ký, đổi mật khẩu, quên mật khẩu). */
 final class AuthEmails {
     private AuthEmails() {
     }
@@ -41,6 +41,31 @@ final class AuthEmails {
                 <p style="margin:0;font-size:14px;color:#b4232c">Nếu không phải bạn thực hiện, hãy dùng chức năng "Quên mật khẩu" để lấy lại tài khoản ngay.</p>
                 """.formatted(HtmlUtils.htmlEscape(fullName), devices));
         return new EmailMessage(to, "Mật khẩu của bạn đã được thay đổi", text, html);
+    }
+
+    static EmailMessage passwordResetOtp(String to, String fullName, String code, Duration validFor) {
+        return otp(to, "Mã đặt lại mật khẩu", "Đặt lại mật khẩu", fullName,
+                "nhập mã dưới đây để đặt lại mật khẩu tài khoản của bạn.",
+                "Không phải bạn yêu cầu? Hãy bỏ qua email này, mật khẩu của bạn vẫn giữ nguyên. "
+                        + "Tuyệt đối không chia sẻ mã này với bất kỳ ai.",
+                code, validFor);
+    }
+
+    static EmailMessage passwordReset(String to, String fullName) {
+        String text = """
+                Xin chào %s,
+
+                Mật khẩu tài khoản của bạn vừa được đặt lại qua chức năng "Quên mật khẩu".
+                Để bảo vệ tài khoản, mọi thiết bị đã được đăng xuất. Hãy đăng nhập lại bằng mật khẩu mới.
+
+                Nếu không phải bạn thực hiện, hãy đặt lại mật khẩu ngay và liên hệ bộ phận hỗ trợ.
+                """.formatted(fullName);
+        String html = layout("Mật khẩu đã được đặt lại", """
+                <p style="margin:0 0 12px;font-size:15px;line-height:1.5">Xin chào <b>%s</b>, mật khẩu tài khoản của bạn vừa được đặt lại qua chức năng "Quên mật khẩu".</p>
+                <p style="margin:0 0 12px;font-size:15px;line-height:1.5">Để bảo vệ tài khoản, mọi thiết bị đã được đăng xuất. Hãy đăng nhập lại bằng mật khẩu mới.</p>
+                <p style="margin:0;font-size:14px;color:#b4232c">Nếu không phải bạn thực hiện, hãy đặt lại mật khẩu ngay và liên hệ bộ phận hỗ trợ.</p>
+                """.formatted(HtmlUtils.htmlEscape(fullName)));
+        return new EmailMessage(to, "Mật khẩu của bạn đã được đặt lại", text, html);
     }
 
     private static EmailMessage otp(String to, String subject, String title, String fullName, String purpose,

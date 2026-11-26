@@ -88,6 +88,17 @@ public class LoginSessionService {
         return count;
     }
 
+    /** Đăng xuất mọi thiết bị của user (đặt lại mật khẩu). Trả về số thiết bị bị đăng xuất. */
+    @Transactional
+    public int revokeAll(Long userId, SessionRevokeReason reason) {
+        Instant now = clock.instant();
+        // Khóa như khi đăng nhập để không có phiên mới chen vào giữa lúc đang đăng xuất.
+        sessions.lockUser(userId);
+        var active = sessions.findActiveByUserId(userId, now);
+        active.forEach(session -> revoke(session, reason, now));
+        return active.size();
+    }
+
     /** Kết thúc phiên và thu hồi mọi refresh token của nó. */
     void revoke(LoginSession session, SessionRevokeReason reason, Instant now) {
         session.revoke(reason, now);
