@@ -151,6 +151,9 @@ public class SecurityConfig {
                     "/api/v1/auth/password-resets/**"
                 ).permitAll()
 
+                .requestMatchers(HttpMethod.GET, "/audio/hsk/**").permitAll()
+                .requestMatchers(HttpMethod.HEAD, "/audio/hsk/**").permitAll()
+
                 // Health check công khai
                 .requestMatchers(
                     HttpMethod.GET,
