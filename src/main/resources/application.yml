@@ -88,6 +88,9 @@ app:
     reset-token-ttl-minutes: 10
     max-requests-per-identifier-per-hour: 5
     max-requests-per-ip-per-hour: 20
+  # Bộ từ vựng HSK dùng cho màn Từ vựng HSK (cột syllabus của hsk_vocabulary).
+  hsk:
+    syllabus: 3.0-2025
   jwt:
     secret-base64: ${JWT_SECRET_BASE64}
     issuer: workhub-backend

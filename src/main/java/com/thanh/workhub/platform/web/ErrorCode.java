@@ -73,7 +73,10 @@ public enum ErrorCode {
     PASSWORD_RESET_NOT_VERIFIED(1023, HttpStatus.CONFLICT, "Vui lòng nhập mã xác minh trước khi đặt mật khẩu mới"),
     PASSWORD_RESET_TOKEN_INVALID(1024, HttpStatus.FORBIDDEN,
             "Phiên đặt lại mật khẩu không hợp lệ, vui lòng nhập lại mã xác minh"),
-    IDENTIFIER_INVALID(1025, HttpStatus.BAD_REQUEST, "Vui lòng nhập email hoặc số điện thoại hợp lệ");
+    IDENTIFIER_INVALID(1025, HttpStatus.BAD_REQUEST, "Vui lòng nhập email hoặc số điện thoại hợp lệ"),
+
+    // Từ vựng HSK
+    HSK_WORD_NOT_FOUND(1026, HttpStatus.NOT_FOUND, "Không tìm thấy từ vựng");
 
     private final int code;
     private final HttpStatus status;
