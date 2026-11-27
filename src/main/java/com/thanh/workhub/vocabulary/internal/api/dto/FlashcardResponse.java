@@ -1,5 +1,7 @@
 package com.thanh.workhub.vocabulary.internal.api.dto;
 
+import java.util.List;
+
 import com.thanh.workhub.vocabulary.internal.domain.WordStatus;
 
 /**
@@ -17,6 +19,11 @@ public record FlashcardResponse(
         String hanViet,
         String wordType,
         HskWordDetailResponse.Example example) {
+
+    public List<CharacterDecomposition> getDecomposition() {
+        return CharacterDecomposition.forWord(hanzi);
+    }
+
 
     /** DUE: đến hạn ôn; NEW: từ chưa học. */
     public enum Reason {

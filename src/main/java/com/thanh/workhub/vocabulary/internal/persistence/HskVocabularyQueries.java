@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.thanh.workhub.vocabulary.internal.api.dto.TonePracticeQuestion;
+import com.thanh.workhub.vocabulary.internal.api.dto.DailyWordResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.FlashcardResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.HskWordDetailResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.HskWordResponse;
@@ -44,6 +47,38 @@ public class HskVocabularyQueries {
 
     public HskVocabularyQueries(NamedParameterJdbcTemplate jdbc) {
         this.jdbc = jdbc;
+    }
+
+    public List<TonePracticeQuestion> findTonePractice(String syllabus) {
+        String sql = """
+                SELECT * FROM (
+                    SELECT level, entry_number, hanzi, audio_path, practice_syllable, practice_position,
+                           practice_tone, row_number() OVER (PARTITION BY practice_tone ORDER BY random()) AS rank
+                    FROM hsk_vocabulary
+                    WHERE syllabus = :syllabus AND practice_tone IS NOT NULL AND nullif(audio_path, '') IS NOT NULL
+                ) candidates
+                ORDER BY rank, random() LIMIT 10
+                """;
+        var questions = jdbc.query(sql, new MapSqlParameterSource("syllabus", syllabus),
+                (rs, i) -> new TonePracticeQuestion(rs.getString("practice_syllable"), rs.getString("audio_path"),
+                        rs.getInt("practice_tone"), rs.getInt("practice_position"), rs.getInt("level"),
+                        rs.getInt("entry_number"), rs.getString("hanzi")));
+        java.util.Collections.shuffle(questions);
+        return questions;
+    }
+
+    public Optional<DailyWordResponse> findDailyWord(String syllabus, LocalDate date) {
+        String sql = """
+                SELECT level, entry_number, hanzi, pinyin, meaning_vi, han_viet, word_type_vi, audio_path
+                FROM hsk_vocabulary WHERE syllabus = :syllabus
+                ORDER BY level, entry_number LIMIT 1
+                OFFSET (SELECT mod(:day, nullif(count(*), 0)) FROM hsk_vocabulary WHERE syllabus = :syllabus)
+                """;
+        var params = new MapSqlParameterSource("syllabus", syllabus).addValue("day", date.toEpochDay());
+        return jdbc.query(sql, params, (rs, i) -> new DailyWordResponse(date, rs.getInt("level"),
+                rs.getInt("entry_number"), rs.getString("hanzi"), rs.getString("pinyin"), rs.getString("meaning_vi"),
+                rs.getString("han_viet"), rs.getString("word_type_vi"), rs.getString("audio_path")))
+                .stream().findFirst();
     }
 
     /** Số từ theo trạng thái của mỗi cấp có dữ liệu. Cấp chưa có từ nào không xuất hiện. */

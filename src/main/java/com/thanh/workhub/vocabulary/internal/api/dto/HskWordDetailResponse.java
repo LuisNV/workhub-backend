@@ -19,6 +19,11 @@ public record HskWordDetailResponse(
         String usageNote,
         List<Example> examples) {
 
+    public List<CharacterDecomposition> getDecomposition() {
+        return CharacterDecomposition.forWord(hanzi);
+    }
+
+
     public record Example(String sentenceZh, String pinyin, String translationVi, String note) {
     }
 }

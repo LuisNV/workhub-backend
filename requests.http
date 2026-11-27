@@ -99,3 +99,23 @@ Authorization: Bearer {{login.response.body.data.accessToken}}
 Content-Type: application/json
 
 {"status": "MASTERED"}
+
+### Bảng Pinyin: thanh mẫu, vận mẫu và âm tiết ghép
+GET http://localhost:8081/api/v1/pinyin/chart
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Bốn thanh điệu và mẹo biến điệu
+GET http://localhost:8081/api/v1/tones
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Một lượt luyện nghe 10 câu
+GET http://localhost:8081/api/v1/tones/practice
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Tab thường gặp
+GET http://localhost:8081/api/v1/radicals?commonOnly=true
+Authorization: Bearer {{login.response.body.data.accessToken}}
+
+### Tìm trong cả 214 bộ theo chữ, Hán Việt, nghĩa hoặc số bộ
+GET http://localhost:8081/api/v1/radicals?q=thuy&strokes=3
+Authorization: Bearer {{login.response.body.data.accessToken}}

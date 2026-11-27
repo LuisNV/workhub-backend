@@ -2,6 +2,8 @@ package com.thanh.workhub.vocabulary.internal.application;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thanh.workhub.platform.web.ApiException;
 import com.thanh.workhub.platform.web.ErrorCode;
+import com.thanh.workhub.vocabulary.internal.api.dto.DailyWordResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.FlashcardResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.FlashcardSessionResponse;
 import com.thanh.workhub.vocabulary.internal.api.dto.HskLevelResponse;
@@ -40,6 +43,13 @@ public class HskVocabularyService {
         this.queries = queries;
         this.clock = clock;
         this.syllabus = syllabus;
+    }
+
+    @Transactional(readOnly = true)
+    public DailyWordResponse dailyWord() {
+        var today = LocalDate.now(clock.withZone(ZoneId.of("Asia/Ho_Chi_Minh")));
+        return queries.findDailyWord(syllabus, today)
+                .orElseThrow(() -> new ApiException(ErrorCode.HSK_WORD_NOT_FOUND));
     }
 
     /** Luôn trả đủ 9 cấp; cấp chưa có từ nào thì {@code available = false}. */

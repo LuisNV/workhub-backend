@@ -1,0 +1,2544 @@
+{
+  "initials": [
+    {
+      "titleVi": "Môi",
+      "items": [
+        {
+          "symbol": "b",
+          "pinyin": "bā",
+          "hanzi": "八",
+          "meaningVi": "tám",
+          "tipVi": "Khép hai môi rồi mở nhanh, giữ luồng hơi nhẹ.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/3.m4a"
+        },
+        {
+          "symbol": "p",
+          "pinyin": "pà",
+          "hanzi": "怕",
+          "meaningVi": "sợ",
+          "tipVi": "Khép hai môi rồi bật ra với luồng hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/3/790.m4a"
+        },
+        {
+          "symbol": "m",
+          "pinyin": "mā",
+          "hanzi": "妈",
+          "meaningVi": "mẹ",
+          "tipVi": "Khép môi và để hơi thoát qua mũi.",
+          "audioUrl": "/audio/pinyin/5988.wav"
+        },
+        {
+          "symbol": "f",
+          "pinyin": "fàn",
+          "hanzi": "饭",
+          "meaningVi": "cơm",
+          "tipVi": "Chạm răng trên vào môi dưới, thổi hơi qua khe.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/50.m4a"
+        }
+      ]
+    },
+    {
+      "titleVi": "Đầu lưỡi · Cuống lưỡi",
+      "items": [
+        {
+          "symbol": "d",
+          "pinyin": "dà",
+          "hanzi": "大",
+          "meaningVi": "lớn",
+          "tipVi": "Đặt đầu lưỡi sát lợi trên rồi nhả nhẹ.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/24.m4a"
+        },
+        {
+          "symbol": "t",
+          "pinyin": "tā",
+          "hanzi": "他",
+          "meaningVi": "anh ấy",
+          "tipVi": "Chạm lợi trên bằng đầu lưỡi rồi bật hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/200.m4a"
+        },
+        {
+          "symbol": "n",
+          "pinyin": "nǐ",
+          "hanzi": "你",
+          "meaningVi": "bạn",
+          "tipVi": "Chạm lợi trên bằng đầu lưỡi, cho hơi qua mũi.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/146.m4a"
+        },
+        {
+          "symbol": "l",
+          "pinyin": "lái",
+          "hanzi": "来",
+          "meaningVi": "đến",
+          "tipVi": "Chạm lợi trên bằng đầu lưỡi, cho hơi thoát hai bên.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/106.m4a"
+        },
+        {
+          "symbol": "g",
+          "pinyin": "gē",
+          "hanzi": "哥",
+          "meaningVi": "anh trai",
+          "tipVi": "Nâng cuống lưỡi chạm ngạc mềm rồi nhả nhẹ.",
+          "audioUrl": "/audio/pinyin/54e5.wav"
+        },
+        {
+          "symbol": "k",
+          "pinyin": "kàn",
+          "hanzi": "看",
+          "meaningVi": "nhìn",
+          "tipVi": "Nâng cuống lưỡi chạm ngạc mềm rồi bật hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/99.m4a"
+        },
+        {
+          "symbol": "h",
+          "pinyin": "hǎo",
+          "hanzi": "好",
+          "meaningVi": "tốt",
+          "tipVi": "Nâng cuống lưỡi gần ngạc mềm và thổi hơi qua khe.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/72.m4a"
+        }
+      ]
+    },
+    {
+      "titleVi": "Mặt lưỡi · Đầu lưỡi sau · Đầu lưỡi trước",
+      "items": [
+        {
+          "symbol": "j",
+          "pinyin": "jiā",
+          "hanzi": "家",
+          "meaningVi": "nhà",
+          "tipVi": "Đầu lưỡi sát răng dưới, nâng mặt lưỡi rồi nhả nhẹ.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/85.m4a"
+        },
+        {
+          "symbol": "q",
+          "pinyin": "qù",
+          "hanzi": "去",
+          "meaningVi": "đi",
+          "tipVi": "Đặt lưỡi như âm j rồi bật hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/167.m4a"
+        },
+        {
+          "symbol": "x",
+          "pinyin": "xiè",
+          "hanzi": "谢",
+          "meaningVi": "cảm ơn",
+          "tipVi": "Để đầu lưỡi sát răng dưới và cho hơi lướt qua mặt lưỡi.",
+          "audioUrl": "/audio/pinyin/8c22.wav"
+        },
+        {
+          "symbol": "zh",
+          "pinyin": "zhōng",
+          "hanzi": "中",
+          "meaningVi": "giữa",
+          "tipVi": "Hơi cong đầu lưỡi về phía sau lợi trên rồi nhả nhẹ.",
+          "audioUrl": "/audio/hsk/3.0-2025/3/981.m4a"
+        },
+        {
+          "symbol": "ch",
+          "pinyin": "chī",
+          "hanzi": "吃",
+          "meaningVi": "ăn",
+          "tipVi": "Cong đầu lưỡi như âm zh rồi bật hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/21.m4a"
+        },
+        {
+          "symbol": "sh",
+          "pinyin": "shì",
+          "hanzi": "是",
+          "meaningVi": "là",
+          "tipVi": "Hơi cong đầu lưỡi, thổi hơi đều qua khe hẹp.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/186.m4a"
+        },
+        {
+          "symbol": "r",
+          "pinyin": "rén",
+          "hanzi": "人",
+          "meaningVi": "người",
+          "tipVi": "Hơi cong đầu lưỡi như âm sh và rung dây thanh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/170.m4a"
+        },
+        {
+          "symbol": "z",
+          "pinyin": "zài",
+          "hanzi": "在",
+          "meaningVi": "ở",
+          "tipVi": "Đưa đầu lưỡi sát mặt sau răng trên rồi nhả nhẹ.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/271.m4a"
+        },
+        {
+          "symbol": "c",
+          "pinyin": "cài",
+          "hanzi": "菜",
+          "meaningVi": "món ăn",
+          "tipVi": "Đặt đầu lưỡi như âm z rồi bật hơi mạnh.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/16.m4a"
+        },
+        {
+          "symbol": "s",
+          "pinyin": "sān",
+          "hanzi": "三",
+          "meaningVi": "ba",
+          "tipVi": "Giữ đầu lưỡi gần răng, thổi hơi đều qua khe.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/173.m4a"
+        }
+      ]
+    }
+  ],
+  "finals": [
+    {
+      "titleVi": "Vận mẫu đơn",
+      "items": [
+        {
+          "symbol": "a",
+          "pinyin": "mā",
+          "hanzi": "妈",
+          "meaningVi": "mẹ",
+          "tipVi": "Mở miệng rộng và hạ lưỡi.",
+          "audioUrl": "/audio/pinyin/5988.wav"
+        },
+        {
+          "symbol": "o",
+          "pinyin": "bō",
+          "hanzi": "波",
+          "meaningVi": "sóng",
+          "tipVi": "Tròn môi, giữ âm ngắn liền sau b.",
+          "audioUrl": "/audio/pinyin/6ce2.wav"
+        },
+        {
+          "symbol": "e",
+          "pinyin": "gē",
+          "hanzi": "哥",
+          "meaningVi": "anh trai",
+          "tipVi": "Hơi mở miệng, lùi lưỡi và thả lỏng môi.",
+          "audioUrl": "/audio/pinyin/54e5.wav"
+        },
+        {
+          "symbol": "i",
+          "pinyin": "mǐ",
+          "hanzi": "米",
+          "meaningVi": "gạo",
+          "tipVi": "Nâng mặt lưỡi ra trước, kéo nhẹ hai khóe môi.",
+          "audioUrl": "/audio/hsk/3.0-2025/3/769.m4a"
+        },
+        {
+          "symbol": "u",
+          "pinyin": "wǔ",
+          "hanzi": "五",
+          "meaningVi": "năm",
+          "tipVi": "Tròn môi và nâng phần sau của lưỡi.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/223.m4a"
+        },
+        {
+          "symbol": "ü",
+          "pinyin": "nǚ",
+          "hanzi": "女",
+          "meaningVi": "nữ",
+          "tipVi": "Giữ lưỡi như khi nói i rồi tròn môi.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/152.m4a"
+        }
+      ]
+    },
+    {
+      "titleVi": "Vận mẫu kép",
+      "items": [
+        {
+          "symbol": "ai",
+          "pinyin": "lái",
+          "hanzi": "来",
+          "meaningVi": "đến",
+          "tipVi": "Mở miệng với a rồi trượt về i.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/106.m4a"
+        },
+        {
+          "symbol": "ei",
+          "pinyin": "běi",
+          "hanzi": "北",
+          "meaningVi": "bắc",
+          "tipVi": "Trượt từ ê về i trong một hơi.",
+          "audioUrl": "/audio/hsk/3.0-2025/3/517.m4a"
+        },
+        {
+          "symbol": "ao",
+          "pinyin": "hǎo",
+          "hanzi": "好",
+          "meaningVi": "tốt",
+          "tipVi": "Mở miệng rộng rồi thu môi dần về u.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/72.m4a"
+        },
+        {
+          "symbol": "ou",
+          "pinyin": "kǒu",
+          "hanzi": "口",
+          "meaningVi": "miệng",
+          "tipVi": "Tròn môi và thu dần khẩu hình.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/104.m4a"
+        },
+        {
+          "symbol": "ia",
+          "pinyin": "jiā",
+          "hanzi": "家",
+          "meaningVi": "nhà",
+          "tipVi": "Lướt nhanh từ i sang a.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/85.m4a"
+        },
+        {
+          "symbol": "ie",
+          "pinyin": "xiě",
+          "hanzi": "写",
+          "meaningVi": "viết",
+          "tipVi": "Lướt từ i sang âm ê mở.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/238.m4a"
+        },
+        {
+          "symbol": "iao",
+          "pinyin": "xiǎo",
+          "hanzi": "小",
+          "meaningVi": "nhỏ",
+          "tipVi": "Lướt từ i sang ao trong một âm tiết.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/232.m4a"
+        },
+        {
+          "symbol": "iou",
+          "pinyin": "liù",
+          "hanzi": "六",
+          "meaningVi": "sáu",
+          "tipVi": "Lướt từ i sang ou. Sau thanh mẫu, viết là iu.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/113.m4a"
+        },
+        {
+          "symbol": "ua",
+          "pinyin": "huā",
+          "hanzi": "花",
+          "meaningVi": "hoa",
+          "tipVi": "Tròn môi với u rồi mở rộng sang a.",
+          "audioUrl": "/audio/hsk/3.0-2025/2/358.m4a"
+        },
+        {
+          "symbol": "uo",
+          "pinyin": "guǒ",
+          "hanzi": "果",
+          "meaningVi": "quả",
+          "tipVi": "Lướt từ u sang o.",
+          "audioUrl": "/audio/pinyin/679c.wav"
+        },
+        {
+          "symbol": "uai",
+          "pinyin": "kuài",
+          "hanzi": "快",
+          "meaningVi": "nhanh",
+          "tipVi": "Lướt từ u sang ai.",
+          "audioUrl": "/audio/hsk/3.0-2025/2/384.m4a"
+        },
+        {
+          "symbol": "uei",
+          "pinyin": "shuǐ",
+          "hanzi": "水",
+          "meaningVi": "nước",
+          "tipVi": "Lướt từ u sang ei. Sau thanh mẫu, viết là ui.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/193.m4a"
+        },
+        {
+          "symbol": "üe",
+          "pinyin": "yuè",
+          "hanzi": "月",
+          "meaningVi": "tháng",
+          "tipVi": "Tròn môi với ü rồi chuyển sang ê mở.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/269.m4a"
+        }
+      ]
+    },
+    {
+      "titleVi": "Vận mẫu mũi trước",
+      "items": [
+        {
+          "symbol": "an",
+          "pinyin": "sān",
+          "hanzi": "三",
+          "meaningVi": "ba",
+          "tipVi": "Khép âm bằng đầu lưỡi chạm lợi trên.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/173.m4a"
+        },
+        {
+          "symbol": "en",
+          "pinyin": "rén",
+          "hanzi": "人",
+          "meaningVi": "người",
+          "tipVi": "Kết thúc âm bằng n ở đầu lưỡi.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/170.m4a"
+        },
+        {
+          "symbol": "ian",
+          "pinyin": "tiān",
+          "hanzi": "天",
+          "meaningVi": "trời",
+          "tipVi": "Lướt từ i sang âm e mở rồi khép bằng n.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/207.m4a"
+        },
+        {
+          "symbol": "in",
+          "pinyin": "xīn",
+          "hanzi": "新",
+          "meaningVi": "mới",
+          "tipVi": "Giữ lưỡi ra trước rồi kết thúc bằng n.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/242.m4a"
+        },
+        {
+          "symbol": "uan",
+          "pinyin": "wán",
+          "hanzi": "玩",
+          "meaningVi": "chơi",
+          "tipVi": "Lướt từ u sang an, khép bằng n.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/214.m4a"
+        },
+        {
+          "symbol": "uen",
+          "pinyin": "wèn",
+          "hanzi": "问",
+          "meaningVi": "hỏi",
+          "tipVi": "Lướt từ u sang en. Sau thanh mẫu, viết là un.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/219.m4a"
+        },
+        {
+          "symbol": "üan",
+          "pinyin": "yuán",
+          "hanzi": "元",
+          "meaningVi": "nguyên",
+          "tipVi": "Tròn môi với ü rồi mở nhẹ và khép bằng n.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/268.m4a"
+        },
+        {
+          "symbol": "ün",
+          "pinyin": "yún",
+          "hanzi": "云",
+          "meaningVi": "mây",
+          "tipVi": "Bắt đầu bằng ü và kết thúc bằng n.",
+          "audioUrl": "/audio/pinyin/4e91.wav"
+        }
+      ]
+    },
+    {
+      "titleVi": "Vận mẫu mũi sau",
+      "items": [
+        {
+          "symbol": "ang",
+          "pinyin": "máng",
+          "hanzi": "忙",
+          "meaningVi": "bận",
+          "tipVi": "Mở rộng miệng rồi khép âm bằng cuống lưỡi.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/118.m4a"
+        },
+        {
+          "symbol": "eng",
+          "pinyin": "děng",
+          "hanzi": "等",
+          "meaningVi": "đợi",
+          "tipVi": "Kết thúc âm bằng ng ở cuống lưỡi.",
+          "audioUrl": "/audio/hsk/3.0-2025/2/334.m4a"
+        },
+        {
+          "symbol": "ong",
+          "pinyin": "zhōng",
+          "hanzi": "中",
+          "meaningVi": "giữa",
+          "tipVi": "Tròn môi và kết thúc bằng ng.",
+          "audioUrl": "/audio/hsk/3.0-2025/3/981.m4a"
+        },
+        {
+          "symbol": "iang",
+          "pinyin": "xiǎng",
+          "hanzi": "想",
+          "meaningVi": "nghĩ",
+          "tipVi": "Lướt từ i sang ang.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/229.m4a"
+        },
+        {
+          "symbol": "ing",
+          "pinyin": "xīng",
+          "hanzi": "星",
+          "meaningVi": "sao",
+          "tipVi": "Nâng mặt lưỡi với i rồi khép bằng ng.",
+          "audioUrl": "/audio/pinyin/661f.wav"
+        },
+        {
+          "symbol": "iong",
+          "pinyin": "xióng",
+          "hanzi": "熊",
+          "meaningVi": "gấu",
+          "tipVi": "Lướt từ i vào âm tròn môi, kết thúc bằng ng.",
+          "audioUrl": "/audio/pinyin/718a.wav"
+        },
+        {
+          "symbol": "uang",
+          "pinyin": "huáng",
+          "hanzi": "黄",
+          "meaningVi": "vàng",
+          "tipVi": "Lướt từ u sang ang.",
+          "audioUrl": "/audio/pinyin/9ec4.wav"
+        },
+        {
+          "symbol": "ueng",
+          "pinyin": "wēng",
+          "hanzi": "翁",
+          "meaningVi": "ông lão",
+          "tipVi": "Tròn môi với u rồi chuyển sang eng.",
+          "audioUrl": "/audio/pinyin/7fc1.wav"
+        }
+      ]
+    },
+    {
+      "titleVi": "Vận mẫu đặc biệt",
+      "items": [
+        {
+          "symbol": "er",
+          "pinyin": "èr",
+          "hanzi": "二",
+          "meaningVi": "hai",
+          "tipVi": "Hơi cong đầu lưỡi khi phát âm.",
+          "audioUrl": "/audio/hsk/3.0-2025/1/48.m4a"
+        }
+      ]
+    }
+  ],
+  "combinations": [
+    {
+      "initial": "",
+      "finalSymbol": "a",
+      "syllable": "a"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ai",
+      "syllable": "ai"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "an",
+      "syllable": "an"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ang",
+      "syllable": "ang"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ao",
+      "syllable": "ao"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "e",
+      "syllable": "e"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ei",
+      "syllable": "ei"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "en",
+      "syllable": "en"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "eng",
+      "syllable": "eng"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "er",
+      "syllable": "er"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "o",
+      "syllable": "o"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ou",
+      "syllable": "ou"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "i",
+      "syllable": "yi"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ia",
+      "syllable": "ya"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ie",
+      "syllable": "ye"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "iao",
+      "syllable": "yao"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "iou",
+      "syllable": "you"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ian",
+      "syllable": "yan"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "in",
+      "syllable": "yin"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "iang",
+      "syllable": "yang"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ing",
+      "syllable": "ying"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "iong",
+      "syllable": "yong"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "u",
+      "syllable": "wu"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ua",
+      "syllable": "wa"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uo",
+      "syllable": "wo"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uai",
+      "syllable": "wai"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uei",
+      "syllable": "wei"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uan",
+      "syllable": "wan"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uen",
+      "syllable": "wen"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "uang",
+      "syllable": "wang"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ueng",
+      "syllable": "weng"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ü",
+      "syllable": "yu"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "üe",
+      "syllable": "yue"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "üan",
+      "syllable": "yuan"
+    },
+    {
+      "initial": "",
+      "finalSymbol": "ün",
+      "syllable": "yun"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "a",
+      "syllable": "ba"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ai",
+      "syllable": "bai"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "an",
+      "syllable": "ban"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ang",
+      "syllable": "bang"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ao",
+      "syllable": "bao"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ei",
+      "syllable": "bei"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "en",
+      "syllable": "ben"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "eng",
+      "syllable": "beng"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "i",
+      "syllable": "bi"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ian",
+      "syllable": "bian"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "iao",
+      "syllable": "biao"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ie",
+      "syllable": "bie"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "in",
+      "syllable": "bin"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "ing",
+      "syllable": "bing"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "o",
+      "syllable": "bo"
+    },
+    {
+      "initial": "b",
+      "finalSymbol": "u",
+      "syllable": "bu"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "a",
+      "syllable": "pa"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ai",
+      "syllable": "pai"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "an",
+      "syllable": "pan"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ang",
+      "syllable": "pang"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ao",
+      "syllable": "pao"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ei",
+      "syllable": "pei"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "en",
+      "syllable": "pen"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "eng",
+      "syllable": "peng"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "i",
+      "syllable": "pi"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ian",
+      "syllable": "pian"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "iao",
+      "syllable": "piao"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ie",
+      "syllable": "pie"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "in",
+      "syllable": "pin"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ing",
+      "syllable": "ping"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "o",
+      "syllable": "po"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "ou",
+      "syllable": "pou"
+    },
+    {
+      "initial": "p",
+      "finalSymbol": "u",
+      "syllable": "pu"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "a",
+      "syllable": "ma"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ai",
+      "syllable": "mai"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "an",
+      "syllable": "man"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ang",
+      "syllable": "mang"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ao",
+      "syllable": "mao"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "e",
+      "syllable": "me"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ei",
+      "syllable": "mei"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "en",
+      "syllable": "men"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "eng",
+      "syllable": "meng"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "i",
+      "syllable": "mi"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ian",
+      "syllable": "mian"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "iao",
+      "syllable": "miao"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ie",
+      "syllable": "mie"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "in",
+      "syllable": "min"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ing",
+      "syllable": "ming"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "iou",
+      "syllable": "miu"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "o",
+      "syllable": "mo"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "ou",
+      "syllable": "mou"
+    },
+    {
+      "initial": "m",
+      "finalSymbol": "u",
+      "syllable": "mu"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "a",
+      "syllable": "fa"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "an",
+      "syllable": "fan"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "ang",
+      "syllable": "fang"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "ei",
+      "syllable": "fei"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "en",
+      "syllable": "fen"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "eng",
+      "syllable": "feng"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "o",
+      "syllable": "fo"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "ou",
+      "syllable": "fou"
+    },
+    {
+      "initial": "f",
+      "finalSymbol": "u",
+      "syllable": "fu"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "a",
+      "syllable": "da"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ai",
+      "syllable": "dai"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "an",
+      "syllable": "dan"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ang",
+      "syllable": "dang"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ao",
+      "syllable": "dao"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "e",
+      "syllable": "de"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ei",
+      "syllable": "dei"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "en",
+      "syllable": "den"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "eng",
+      "syllable": "deng"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "i",
+      "syllable": "di"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ia",
+      "syllable": "dia"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ian",
+      "syllable": "dian"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "iao",
+      "syllable": "diao"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ie",
+      "syllable": "die"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ing",
+      "syllable": "ding"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "iou",
+      "syllable": "diu"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ong",
+      "syllable": "dong"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "ou",
+      "syllable": "dou"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "u",
+      "syllable": "du"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "uan",
+      "syllable": "duan"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "uei",
+      "syllable": "dui"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "uen",
+      "syllable": "dun"
+    },
+    {
+      "initial": "d",
+      "finalSymbol": "uo",
+      "syllable": "duo"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "a",
+      "syllable": "ta"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ai",
+      "syllable": "tai"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "an",
+      "syllable": "tan"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ang",
+      "syllable": "tang"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ao",
+      "syllable": "tao"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "e",
+      "syllable": "te"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "eng",
+      "syllable": "teng"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "i",
+      "syllable": "ti"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ian",
+      "syllable": "tian"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "iao",
+      "syllable": "tiao"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ie",
+      "syllable": "tie"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ing",
+      "syllable": "ting"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ong",
+      "syllable": "tong"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "ou",
+      "syllable": "tou"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "u",
+      "syllable": "tu"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "uan",
+      "syllable": "tuan"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "uei",
+      "syllable": "tui"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "uen",
+      "syllable": "tun"
+    },
+    {
+      "initial": "t",
+      "finalSymbol": "uo",
+      "syllable": "tuo"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "a",
+      "syllable": "na"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ai",
+      "syllable": "nai"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "an",
+      "syllable": "nan"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ang",
+      "syllable": "nang"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ao",
+      "syllable": "nao"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "e",
+      "syllable": "ne"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ei",
+      "syllable": "nei"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "en",
+      "syllable": "nen"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "eng",
+      "syllable": "neng"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "i",
+      "syllable": "ni"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ian",
+      "syllable": "nian"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "iang",
+      "syllable": "niang"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "iao",
+      "syllable": "niao"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ie",
+      "syllable": "nie"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "in",
+      "syllable": "nin"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ing",
+      "syllable": "ning"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "iou",
+      "syllable": "niu"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ong",
+      "syllable": "nong"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ou",
+      "syllable": "nou"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "u",
+      "syllable": "nu"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "uan",
+      "syllable": "nuan"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "uo",
+      "syllable": "nuo"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "ü",
+      "syllable": "nü"
+    },
+    {
+      "initial": "n",
+      "finalSymbol": "üe",
+      "syllable": "nüe"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "a",
+      "syllable": "la"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ai",
+      "syllable": "lai"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "an",
+      "syllable": "lan"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ang",
+      "syllable": "lang"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ao",
+      "syllable": "lao"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "e",
+      "syllable": "le"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ei",
+      "syllable": "lei"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "eng",
+      "syllable": "leng"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "i",
+      "syllable": "li"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ia",
+      "syllable": "lia"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ian",
+      "syllable": "lian"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "iang",
+      "syllable": "liang"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "iao",
+      "syllable": "liao"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ie",
+      "syllable": "lie"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "in",
+      "syllable": "lin"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ing",
+      "syllable": "ling"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "iou",
+      "syllable": "liu"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "o",
+      "syllable": "lo"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ong",
+      "syllable": "long"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ou",
+      "syllable": "lou"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "u",
+      "syllable": "lu"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "uan",
+      "syllable": "luan"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "uen",
+      "syllable": "lun"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "uo",
+      "syllable": "luo"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "ü",
+      "syllable": "lü"
+    },
+    {
+      "initial": "l",
+      "finalSymbol": "üe",
+      "syllable": "lüe"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "a",
+      "syllable": "ga"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ai",
+      "syllable": "gai"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "an",
+      "syllable": "gan"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ang",
+      "syllable": "gang"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ao",
+      "syllable": "gao"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "e",
+      "syllable": "ge"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ei",
+      "syllable": "gei"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "en",
+      "syllable": "gen"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "eng",
+      "syllable": "geng"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ong",
+      "syllable": "gong"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ou",
+      "syllable": "gou"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "u",
+      "syllable": "gu"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "ua",
+      "syllable": "gua"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uai",
+      "syllable": "guai"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uan",
+      "syllable": "guan"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uang",
+      "syllable": "guang"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uei",
+      "syllable": "gui"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uen",
+      "syllable": "gun"
+    },
+    {
+      "initial": "g",
+      "finalSymbol": "uo",
+      "syllable": "guo"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "a",
+      "syllable": "ka"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ai",
+      "syllable": "kai"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "an",
+      "syllable": "kan"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ang",
+      "syllable": "kang"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ao",
+      "syllable": "kao"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "e",
+      "syllable": "ke"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ei",
+      "syllable": "kei"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "en",
+      "syllable": "ken"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "eng",
+      "syllable": "keng"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ong",
+      "syllable": "kong"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ou",
+      "syllable": "kou"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "u",
+      "syllable": "ku"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "ua",
+      "syllable": "kua"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uai",
+      "syllable": "kuai"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uan",
+      "syllable": "kuan"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uang",
+      "syllable": "kuang"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uei",
+      "syllable": "kui"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uen",
+      "syllable": "kun"
+    },
+    {
+      "initial": "k",
+      "finalSymbol": "uo",
+      "syllable": "kuo"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "a",
+      "syllable": "ha"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ai",
+      "syllable": "hai"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "an",
+      "syllable": "han"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ang",
+      "syllable": "hang"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ao",
+      "syllable": "hao"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "e",
+      "syllable": "he"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ei",
+      "syllable": "hei"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "en",
+      "syllable": "hen"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "eng",
+      "syllable": "heng"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ong",
+      "syllable": "hong"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ou",
+      "syllable": "hou"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "u",
+      "syllable": "hu"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "ua",
+      "syllable": "hua"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uai",
+      "syllable": "huai"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uan",
+      "syllable": "huan"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uang",
+      "syllable": "huang"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uei",
+      "syllable": "hui"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uen",
+      "syllable": "hun"
+    },
+    {
+      "initial": "h",
+      "finalSymbol": "uo",
+      "syllable": "huo"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "i",
+      "syllable": "ji"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ia",
+      "syllable": "jia"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ian",
+      "syllable": "jian"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "iang",
+      "syllable": "jiang"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "iao",
+      "syllable": "jiao"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ie",
+      "syllable": "jie"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "in",
+      "syllable": "jin"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ing",
+      "syllable": "jing"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "iong",
+      "syllable": "jiong"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "iou",
+      "syllable": "jiu"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ü",
+      "syllable": "ju"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "üan",
+      "syllable": "juan"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "üe",
+      "syllable": "jue"
+    },
+    {
+      "initial": "j",
+      "finalSymbol": "ün",
+      "syllable": "jun"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "i",
+      "syllable": "qi"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ia",
+      "syllable": "qia"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ian",
+      "syllable": "qian"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "iang",
+      "syllable": "qiang"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "iao",
+      "syllable": "qiao"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ie",
+      "syllable": "qie"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "in",
+      "syllable": "qin"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ing",
+      "syllable": "qing"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "iong",
+      "syllable": "qiong"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "iou",
+      "syllable": "qiu"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ü",
+      "syllable": "qu"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "üan",
+      "syllable": "quan"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "üe",
+      "syllable": "que"
+    },
+    {
+      "initial": "q",
+      "finalSymbol": "ün",
+      "syllable": "qun"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "i",
+      "syllable": "xi"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ia",
+      "syllable": "xia"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ian",
+      "syllable": "xian"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "iang",
+      "syllable": "xiang"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "iao",
+      "syllable": "xiao"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ie",
+      "syllable": "xie"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "in",
+      "syllable": "xin"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ing",
+      "syllable": "xing"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "iong",
+      "syllable": "xiong"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "iou",
+      "syllable": "xiu"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ü",
+      "syllable": "xu"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "üan",
+      "syllable": "xuan"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "üe",
+      "syllable": "xue"
+    },
+    {
+      "initial": "x",
+      "finalSymbol": "ün",
+      "syllable": "xun"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "a",
+      "syllable": "zha"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ai",
+      "syllable": "zhai"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "an",
+      "syllable": "zhan"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ang",
+      "syllable": "zhang"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ao",
+      "syllable": "zhao"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "e",
+      "syllable": "zhe"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ei",
+      "syllable": "zhei"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "en",
+      "syllable": "zhen"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "eng",
+      "syllable": "zheng"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "i",
+      "syllable": "zhi"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ong",
+      "syllable": "zhong"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ou",
+      "syllable": "zhou"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "u",
+      "syllable": "zhu"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "ua",
+      "syllable": "zhua"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uai",
+      "syllable": "zhuai"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uan",
+      "syllable": "zhuan"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uang",
+      "syllable": "zhuang"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uei",
+      "syllable": "zhui"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uen",
+      "syllable": "zhun"
+    },
+    {
+      "initial": "zh",
+      "finalSymbol": "uo",
+      "syllable": "zhuo"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "a",
+      "syllable": "cha"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ai",
+      "syllable": "chai"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "an",
+      "syllable": "chan"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ang",
+      "syllable": "chang"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ao",
+      "syllable": "chao"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "e",
+      "syllable": "che"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "en",
+      "syllable": "chen"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "eng",
+      "syllable": "cheng"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "i",
+      "syllable": "chi"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ong",
+      "syllable": "chong"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ou",
+      "syllable": "chou"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "u",
+      "syllable": "chu"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "ua",
+      "syllable": "chua"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uai",
+      "syllable": "chuai"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uan",
+      "syllable": "chuan"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uang",
+      "syllable": "chuang"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uei",
+      "syllable": "chui"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uen",
+      "syllable": "chun"
+    },
+    {
+      "initial": "ch",
+      "finalSymbol": "uo",
+      "syllable": "chuo"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "a",
+      "syllable": "sha"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ai",
+      "syllable": "shai"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "an",
+      "syllable": "shan"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ang",
+      "syllable": "shang"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ao",
+      "syllable": "shao"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "e",
+      "syllable": "she"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ei",
+      "syllable": "shei"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "en",
+      "syllable": "shen"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "eng",
+      "syllable": "sheng"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "i",
+      "syllable": "shi"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ou",
+      "syllable": "shou"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "u",
+      "syllable": "shu"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "ua",
+      "syllable": "shua"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uai",
+      "syllable": "shuai"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uan",
+      "syllable": "shuan"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uang",
+      "syllable": "shuang"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uei",
+      "syllable": "shui"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uen",
+      "syllable": "shun"
+    },
+    {
+      "initial": "sh",
+      "finalSymbol": "uo",
+      "syllable": "shuo"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "an",
+      "syllable": "ran"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "ang",
+      "syllable": "rang"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "ao",
+      "syllable": "rao"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "e",
+      "syllable": "re"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "en",
+      "syllable": "ren"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "eng",
+      "syllable": "reng"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "i",
+      "syllable": "ri"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "ong",
+      "syllable": "rong"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "ou",
+      "syllable": "rou"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "u",
+      "syllable": "ru"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "uan",
+      "syllable": "ruan"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "uei",
+      "syllable": "rui"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "uen",
+      "syllable": "run"
+    },
+    {
+      "initial": "r",
+      "finalSymbol": "uo",
+      "syllable": "ruo"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "a",
+      "syllable": "za"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ai",
+      "syllable": "zai"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "an",
+      "syllable": "zan"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ang",
+      "syllable": "zang"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ao",
+      "syllable": "zao"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "e",
+      "syllable": "ze"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ei",
+      "syllable": "zei"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "en",
+      "syllable": "zen"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "eng",
+      "syllable": "zeng"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "i",
+      "syllable": "zi"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ong",
+      "syllable": "zong"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "ou",
+      "syllable": "zou"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "u",
+      "syllable": "zu"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "uan",
+      "syllable": "zuan"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "uei",
+      "syllable": "zui"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "uen",
+      "syllable": "zun"
+    },
+    {
+      "initial": "z",
+      "finalSymbol": "uo",
+      "syllable": "zuo"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "a",
+      "syllable": "ca"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "ai",
+      "syllable": "cai"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "an",
+      "syllable": "can"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "ang",
+      "syllable": "cang"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "ao",
+      "syllable": "cao"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "e",
+      "syllable": "ce"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "en",
+      "syllable": "cen"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "eng",
+      "syllable": "ceng"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "i",
+      "syllable": "ci"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "ong",
+      "syllable": "cong"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "ou",
+      "syllable": "cou"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "u",
+      "syllable": "cu"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "uan",
+      "syllable": "cuan"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "uei",
+      "syllable": "cui"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "uen",
+      "syllable": "cun"
+    },
+    {
+      "initial": "c",
+      "finalSymbol": "uo",
+      "syllable": "cuo"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "a",
+      "syllable": "sa"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "ai",
+      "syllable": "sai"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "an",
+      "syllable": "san"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "ang",
+      "syllable": "sang"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "ao",
+      "syllable": "sao"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "e",
+      "syllable": "se"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "en",
+      "syllable": "sen"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "eng",
+      "syllable": "seng"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "i",
+      "syllable": "si"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "ong",
+      "syllable": "song"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "ou",
+      "syllable": "sou"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "u",
+      "syllable": "su"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "uan",
+      "syllable": "suan"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "uei",
+      "syllable": "sui"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "uen",
+      "syllable": "sun"
+    },
+    {
+      "initial": "s",
+      "finalSymbol": "uo",
+      "syllable": "suo"
+    }
+  ]
+}

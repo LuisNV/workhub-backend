@@ -46,6 +46,22 @@ class HskVocabularyDatabaseTest {
     }
 
     @Test
+    void practiceDrawsTenDistinctHskRecordingsCoveringFourTones() throws Exception {
+        var response = mvc.perform(get("/api/v1/tones/practice").header("Authorization", token))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.data.questions.length()").value(10))
+                .andReturn().getResponse().getContentAsString(java.nio.charset.StandardCharsets.UTF_8);
+        var questions = JsonPath.parse(response);
+        java.util.List<String> paths = questions.read("$.data.questions[*].audioUrl");
+        java.util.List<Integer> tones = questions.read("$.data.questions[*].correctTone");
+        org.junit.jupiter.api.Assertions.assertEquals(10, paths.stream().distinct().count());
+        org.junit.jupiter.api.Assertions.assertEquals(4, tones.stream().distinct().count());
+        for (String path : paths) {
+            org.junit.jupiter.api.Assertions.assertTrue(path.startsWith("/audio/hsk/"));
+            org.junit.jupiter.api.Assertions.assertTrue(new org.springframework.core.io.ClassPathResource("static" + path).exists());
+        }
+    }
+
+    @Test
     void listsAllNineLevelsWithProgress() throws Exception {
         progress(147, "MASTERED");   // 你好
         progress(4, "MASTERED");     // 爸爸
